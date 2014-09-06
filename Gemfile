@@ -22,6 +22,14 @@ end
 group :test, :development do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
+
+  gem 'pry-rails'
+  gem 'pry-doc'
+  gem 'pry-stack_explorer'
+  gem 'pry-byebug'
+
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :development do
@@ -31,6 +39,12 @@ end
 
 group :test do
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'database_rewinder'
+
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'guard-spring'
 end
 
 group :doc do
