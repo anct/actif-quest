@@ -22,6 +22,12 @@ end
 group :test, :development do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
+end
+
+group :development do
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem 'spring-commands-rspec'
 
   gem 'pry-rails'
   gem 'pry-doc'
@@ -30,11 +36,9 @@ group :test, :development do
 
   gem 'better_errors'
   gem 'binding_of_caller'
-end
 
-group :development do
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'rails_best_practices'
+  gem 'bullet'
 end
 
 group :test do
