@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class ExhibitonUploader < CarrierWave::Uploader::Base
+class ExhibitionUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
