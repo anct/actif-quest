@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @exhibition.name %>
+</p>
+
+<p>
+  <strong>Introduction:</strong>
+  <%= @exhibition.introduction %>
+</p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= @exhibition.image_url %>
+</p>
+
+<p>
+  <strong>Group:</strong>
+  <%= @exhibition.group_id %>
+</p>
+
+<%= link_to 'Edit', edit_admin_exhibition_path(@exhibition) %> |
+<%= link_to 'Back', admin_exhibitions_path %>
