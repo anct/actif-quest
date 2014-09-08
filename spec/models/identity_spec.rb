@@ -1,10 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Identity, :type => :model do
+  let(:identity) { FactoryGirl.create(:identity) }
+  subject { identity }
+
+  describe 'associations' do
+    it { is_expected.to respond_to(:user) }
+  end
 
   describe 'validations' do
-
-    before { FactoryGirl.create(:identity) }
+    before { identity }
 
     it do
       another_identity = FactoryGirl.build(:identity, uid: '54321')

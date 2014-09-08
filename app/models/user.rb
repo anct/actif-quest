@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+
+  has_many :identities
+
   validates_presence_of :name, :screen_name
   validates_uniqueness_of :name
   validates_format_of :name, with: /\A(\w)+\Z/

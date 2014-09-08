@@ -1,8 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe User, :type => :model do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user).tap { |u| p u.name } }
   subject { user }
+
+  describe 'associations' do
+    it { is_expected.to respond_to(:identities) }
+  end
 
   describe 'validations' do
     it { is_expected.to be_valid }
