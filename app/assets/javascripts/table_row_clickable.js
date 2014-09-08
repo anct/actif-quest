@@ -1,4 +1,4 @@
-$(function() {
+$(document).on('ready page:load', function() {
   $('.table-row-clickable tr').on('click', function(e) {
     var $target = $(e.target);
     if (!$target.is('a')) {
