@@ -42,4 +42,14 @@ ActiveRecord::Schema.define(version: 20140908080206) do
   add_index "identities", ["uid"], name: "index_identities_on_uid"
   add_index "identities", ["user_id", "provider"], name: "index_identities_on_user_id_and_provider", unique: true
 
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "screen_name"
+    t.string   "image_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["name"], name: "index_users_on_name", unique: true
+
 end
