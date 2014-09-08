@@ -2,10 +2,9 @@
 
 FactoryGirl.define do
   factory :identity do
-    user_id 1
-    uid "12345"
+    uid Faker::Number.number(8)
     provider "facebook"
-    token "usertoken"
+    token Faker::Internet.password
     expires_at "2014-09-07 05:07:04"
   end
 end

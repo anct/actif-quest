@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :user do
-    name Faker::Internet.user_name
+    name Faker::Internet.user_name(5..16).gsub(/\./, '')
     screen_name Faker::Name.name
     image_url Faker::Internet.url
   end
