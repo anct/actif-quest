@@ -5,7 +5,7 @@
 
   <tbody>
     <% @exhibitions.each do |exhibition| %>
-      <tr data-href="<%= admin_exhibition_path(exhibition) %>">
+      <tr class="pointer-cursor" data-href="<%= admin_exhibition_path(exhibition) %>">
         <td><%= exhibition.name %></td>
         <td><%= exhibition.group_id %></td>
         <td>
