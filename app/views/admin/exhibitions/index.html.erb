@@ -1,26 +1,17 @@
-<h1>Listing admin_exhibitions</h1>
+<h1><strong>展</strong>示一覧 <small>- Exhibition</small></h1>
+<br>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Introduction</th>
-      <th>Image url</th>
-      <th>Group</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<table class="table table-hover table-row-clickable">
 
   <tbody>
     <% @exhibitions.each do |exhibition| %>
-      <tr>
+      <tr data-href="<%= admin_exhibition_path(exhibition) %>">
         <td><%= exhibition.name %></td>
-        <td><%= exhibition.introduction %></td>
-        <td><%= exhibition.image_url %></td>
         <td><%= exhibition.group_id %></td>
-        <td><%= link_to 'Show', admin_exhibition_path(exhibition) %></td>
-        <td><%= link_to 'Edit', edit_admin_exhibition_path(exhibition) %></td>
-        <td><%= link_to 'Destroy', admin_exhibition_path(exhibition), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to 'Edit', edit_admin_exhibition_path(exhibition), class: "btn btn-primary" %>
+          <%= link_to 'Destroy', admin_exhibition_path(exhibition), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+        </td>
       </tr>
     <% end %>
   </tbody>

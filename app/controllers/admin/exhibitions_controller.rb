@@ -1,4 +1,4 @@
-class Admin::ExhibitionsController < ApplicationController
+class Admin::ExhibitionsController < Admin::BaseController
   before_action :set_admin_exhibition, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/exhibitions
