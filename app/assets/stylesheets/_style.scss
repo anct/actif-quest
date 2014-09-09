@@ -1,20 +1,20 @@
 .admin-header {
-	padding-top: 40px;
-	padding-bottom: 40px;
-	text-align: left;
-	margin-bottom: 40px;
-	position: relative;
-	padding: 40px 15px;
-	color: #ffffff;
-	background-image: linear-gradient(to bottom,$brand-primary 0,lighten($brand-primary,20%) 100%);
-	h1 { font-size: 60px; }
-	small { color: #ffffff; }
+  padding-top: 40px;
+  padding-bottom: 40px;
+  text-align: left;
+  margin-bottom: 40px;
+  position: relative;
+  padding: 40px 15px;
+  color: #ffffff;
+  background-image: linear-gradient(to bottom,$brand-primary 0,lighten($brand-primary,20%) 100%);
+  h1 { font-size: 60px; }
+  small { color: #ffffff; }
 }
 
 .pointer-cursor {
-	cursor:pointer;
+  cursor:pointer;
 }
 
 strong {
-	color: #db7093;
+  color: #db7093;
 }
