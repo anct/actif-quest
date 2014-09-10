@@ -21,6 +21,8 @@ group :default do
 
   gem 'bootstrap-sass'
   gem 'autoprefixer-rails'
+
+  gem 'devise'
 end
 
 group :test, :development do
