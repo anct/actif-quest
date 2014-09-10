@@ -8,24 +8,24 @@
 </head>
 
 <body>
-	<div class="admin-header">
-		<div class="container">
-  		<h1>Actif Quest <small>for Admin</small></h1>
-  	</div>
-	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-3">
-				<div class="list-group">
+  <div class="admin-header">
+    <div class="container">
+      <h1>Actif Quest <small>for Admin</small></h1>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="list-group">
           <a href="<%= admin_exhibitions_path %>" class="list-group-item">展示一覧 <small>- Exhibitions</small></a>
           <a href="<%= admin_groups_path %>" class="list-group-item">グループ(部活)一覧 <small>- Groups</small></a>
-				</div>
-			</div>
-			<div class="col-md-9">
-				<%= yield %>
-			</div>
-		</div>
-	</div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
