@@ -15,6 +15,10 @@
   cursor:pointer;
 }
 
-span:first-child {
-  color: #db7093;
+h1.first:first-letter {
+  color: darken($brand-primary, 10%);
+}
+
+span {
+  color: darken($brand-primary, 10%);
 }
