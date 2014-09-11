@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   devise_for :admins, controllers: { sessions: "admin/sessions" }
 
   namespace :admin do
-    resources :groups
     resources :exhibitions
+    resources :groups
+    get '/' => 'home#dashboard'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
