@@ -38,6 +38,10 @@ group :development do
   gem 'pry-stack_explorer'
   gem 'pry-byebug'
 
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'guard-spring'
+
   gem 'better_errors'
   gem 'binding_of_caller'
 
@@ -49,10 +53,7 @@ group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'database_rewinder'
-
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'guard-spring'
+  gem 'faker'
 end
 
 group :doc do
