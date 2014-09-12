@@ -19,6 +19,23 @@ h1.first:first-letter {
   color: darken($brand-primary, 10%);
 }
 
-span {
+span.pink {
   color: darken($brand-primary, 10%);
+}
+
+.alert {
+  h2 {
+    font-size: $font-size-large;
+    margin-top: 0;
+  }
+  ul {
+    margin-bottom: 0;
+  }
+}
+
+.form-horizontal {
+  .input-group[class*="col-"] {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
 }

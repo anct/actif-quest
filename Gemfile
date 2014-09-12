@@ -21,6 +21,7 @@ group :default do
 
   gem 'bootstrap-sass'
   gem 'autoprefixer-rails'
+  gem 'font-awesome-rails'
 
   gem 'devise'
 end
