@@ -14,14 +14,13 @@
     </div>
   </div>
   <div class="container">
+    <% if admin_signed_in? %> 
     <div class="row">
       <div class="col-md-3">
-      <% if admin_signed_in? %> 
         <div class="list-group">
           <a href="<%= admin_exhibitions_path %>" class="list-group-item">展示一覧 <small>- Exhibitions</small></a>
           <a href="<%= admin_groups_path %>" class="list-group-item">グループ(部活)一覧 <small>- Groups</small></a>
         </div>
-      <% end %>
       </div>
       <div class="col-md-9">
         <% if admin_signed_in? %>
@@ -32,6 +31,9 @@
         <%= yield %>
       </div>
     </div>
+    <% else %>
+      <%= yield %>
+    <% end %>
   </div>
 </body>
 </html>
