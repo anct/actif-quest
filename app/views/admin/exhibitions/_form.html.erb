@@ -12,20 +12,20 @@
   <% end %>
 
   <div class="field">
-    <span><%= f.label :name %></span><br>
-    <%= f.text_field :name %>
+      <span class="pink"><%= f.label :name %></span class="pink"><br>
+      <%= f.text_field :name %>
   </div>
   <div class="field">
-    <span><%= f.label :introduction %></span><br>
+    <span class="pink"><%= f.label :introduction %></span class="pink"><br>
     <%= f.text_field :introduction %>
   </div>
   <div class="field">
-    <span><%= f.label :image_url %></span><br>
+    <span class="pink"><%= f.label :image_url %></span class="pink"><br>
     <%= f.text_field :image_url %>
   </div>
   <div class="field">
-    <span><%= f.label :group_id %></span><br>
-    <%= f.number_field :group_id %>
+    <span class="pink"><%= f.label :group_id %></span class="pink"><br>
+    <%= f.select :group_id, @groups.map { |g| [g.name, g.id] } %>
   </div>
   <br>
   <div class="actions">
