@@ -1,35 +1,53 @@
 <%= form_for([:admin, @exhibition]) do |f| %>
-  <% if @exhibition.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@exhibition.errors.count, "error") %> prohibited this admin_exhibition from being saved:</h2>
+<% if @exhibition.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@exhibition.errors.count, "error") %> prohibited this admin_exhibition from being saved:</h2>
 
-      <ul>
-      <% @exhibition.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <ul>
+    <% @exhibition.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<form class="form-horizontal">
+  <div class="form-group">
+    <%= f.label :name, class: "col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :name, autofocus: true, placeholder: "Name", class: "form-control" %>
+      <br>
     </div>
-  <% end %>
+  </div>
 
-  <div class="field">
-      <span class="pink"><%= f.label :name %></span class="pink"><br>
-      <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :introduction, class: "col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :introduction, autofocus: true, placeholder: "Introduction", class: "form-control" %>
+      <br>
+    </div>
   </div>
-  <div class="field">
-    <span class="pink"><%= f.label :introduction %></span class="pink"><br>
-    <%= f.text_field :introduction %>
+
+  <div class="form-group">
+    <%= f.label :image_url, class: "col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :image_url, placeholder: "Image_url", class: "form-control" %>
+      <br>
+    </div>
   </div>
-  <div class="field">
-    <span class="pink"><%= f.label :image_url %></span class="pink"><br>
-    <%= f.text_field :image_url %>
+
+<div class="form-group">
+  <%= f.label :group_id, class: "col-sm-3 control-label" %>
+  <div class="col-sm-9">
+    <%= f.select :group_id, @groups.map { |g| [g.name, g.id] }, {}, class: 'form-control' %>
+    <br>
   </div>
-  <div class="field">
-    <span class="pink"><%= f.label :group_id %></span class="pink"><br>
-    <%= f.select :group_id, @groups.map { |g| [g.name, g.id] } %>
-  </div>
-  <br>
-  <div class="actions">
-    <%= f.submit :class => "btn btn-primary" %>
-  </div>
-  <br>
+</div>
+</form>
+
+<br>
+<div class="actions">
+  <%= f.submit class: "btn btn-primary" %>
+</div>
+<br>
 <% end %>
