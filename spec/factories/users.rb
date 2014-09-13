@@ -2,8 +2,17 @@
 
 FactoryGirl.define do
   factory :user do
-    name Faker::Internet.user_name(5..16).gsub(/\./, '')
-    screen_name Faker::Name.name
-    image_url Faker::Internet.url
+    name {
+      Faker::Config.locale = :en
+      Faker::Internet.user_name(5..16).gsub(/\./, '')
+    }
+    screen_name {
+      Faker::Config.locale = :ja
+      Faker::Name.name
+    }
+    image_url {
+      Faker::Config.locale = :en
+      Faker::Internet.url
+    }
   end
 end

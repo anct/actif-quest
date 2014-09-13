@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, :type => :model do
-  let(:user) { FactoryGirl.create(:user).tap { |u| p u.name } }
+  let(:user) { FactoryGirl.create(:user) }
   subject { user }
 
   describe 'associations' do

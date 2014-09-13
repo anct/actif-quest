@@ -11,13 +11,13 @@ RSpec.describe Identity, :type => :model do
   describe 'validations' do
     before { identity }
 
-    it do
-      another_identity = FactoryGirl.build(:identity, uid: '54321')
+    it 'that combination of provider and user_id is not uniqueness' do
+      another_identity = FactoryGirl.build(:identity, uid: identity.uid.reverse)
       expect(another_identity).to be_invalid
     end
 
-    it do
-      another_identity = FactoryGirl.build(:identity, user_id: 2)
+    it 'that combination of provider and uid is not uniqueness' do
+      another_identity = FactoryGirl.build(:identity, user_id: 2, uid: identity.uid)
       expect(another_identity).to be_invalid
     end
   end

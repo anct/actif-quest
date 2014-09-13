@@ -75,16 +75,4 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 =end
-
-  config.before :all do
-    FactoryGirl.reload
-  end
-
-  config.before :suite do
-    DatabaseRewinder.clean_all
-  end
-
-  config.after :each do
-    DatabaseRewinder.clean
-  end
 end
