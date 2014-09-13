@@ -12,7 +12,7 @@
 
 <p class="lead">
   <span class="pink">Image url:</span>
-  <%= @exhibition.image_url %>
+  <%= image_tag(@exhibition.image_url) if @exhibition.image_url.present? %>
 </p>
 
 <p class="lead">
