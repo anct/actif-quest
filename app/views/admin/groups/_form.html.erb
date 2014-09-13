@@ -11,12 +11,17 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <span><%= f.label :name %></span><br>
-    <%= f.text_field :name %>
-  </div>
-    <br>
-  <div class="actions">
+  <form class="form-horizontal">
+    <div class="form-group">
+      <%= f.label :name, class: "col-sm-3 control-label" %>
+      <div class="col-sm-9">
+        <%= f.text_field :name, autofocus: true, placeholder: "Name", :class => "form-control" %>
+        <br>
+      </div>
+    </div>
+  </form>
+
+  <div class="form-group">
     <%= f.submit :class => "btn btn-primary" %>
   </div>
   <br>
