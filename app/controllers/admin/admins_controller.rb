@@ -1,8 +1,8 @@
-class Admin::AdminsController < ApplicationController
+class Admin::AdminsController < Admin::BaseController
+  before_action :set_admin, only: [:show, :destroy]
 
   def index
-  	render :text => "index"
-    # @admins = Admin.all
+    @admins = Admin.all
   end
 
   def show
@@ -10,9 +10,6 @@ class Admin::AdminsController < ApplicationController
 
   def new
     @admin = Admin.new
-  end
-
-  def edit
   end
 
   def create
@@ -29,18 +26,6 @@ class Admin::AdminsController < ApplicationController
     end
   end
 
-  def update
-    respond_to do |format|
-      if @admin.update(admin_admin_params)
-        format.html { redirect_to admin_admins_url, notice: 'Admin was successfully updated.' }
-        format.json { render :show, status: :ok, location: @admin }
-      else
-        format.html { render :edit }
-        format.json { render json: @admin.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   def destroy
     @admin.destroy
     respond_to do |format|
@@ -48,4 +33,14 @@ class Admin::AdminsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def admin_admin_params
+      params.require(:admin).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def set_admin
+      @admin = Admin.find(params[:id])
+    end
 end
