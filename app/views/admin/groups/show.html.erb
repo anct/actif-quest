@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p class="lead">
+  <span>Name:</span>
+  <%= @group.name %>
+</p>
+
+<%= link_to 'Edit', edit_admin_group_path(@group) %> |
+<%= link_to 'Back', admin_groups_path %>

@@ -1,0 +1,21 @@
+<h1 class="first">実績一覧 <small>- Achievements</small></h1>
+<br>
+
+<table class="table table-hover table-row-clickable">
+
+  <tbody>
+    <% @achievements.each do |achievement| %>
+      <tr class="pointer-cursor" data-href="<%= admin_achievement_path(achievement) %>">
+        <td><%= achievement.name %></td>
+        <td>
+          <%= link_to 'Edit', edit_admin_achievement_path(achievement), class: "btn btn-primary" %>
+          <%= link_to 'Destroy', admin_achievement_path(achievement), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Achievement', new_admin_achievement_path %>
