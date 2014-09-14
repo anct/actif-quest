@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 group :default do
   # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
   gem 'rails', '4.1.5'
@@ -24,6 +23,7 @@ group :default do
   gem 'font-awesome-rails'
 
   gem 'devise'
+  gem 'annotate', :git => 'https://github.com/ctran/annotate_models'
 end
 
 group :test, :development do
