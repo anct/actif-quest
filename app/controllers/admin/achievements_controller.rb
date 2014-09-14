@@ -69,6 +69,6 @@ class Admin::AchievementsController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_achievement_params
-      params.require(:achievement).permit(:name, :introduction, :image_url, :group_id)
+      params.require(:achievement).permit(:name, :condition, :description, :icon_url)
     end
 end
