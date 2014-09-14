@@ -72,5 +72,3 @@ class Admin::AchievementsController < Admin::BaseController
       params.require(:achievement).permit(:name, :introduction, :image_url, :group_id)
     end
 end
-
-end
