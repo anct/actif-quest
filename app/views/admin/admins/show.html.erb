@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p class="lead">
+  <span class="pink">Name:</span>
+  <%= @admin.name %>
+</p>
+
+<p class="lead">
+  <span class="pink">Email: </span>
+  <%= @admin.email %>
+</p>
+
+<p class="lead">
+  <span class="pink">Sign in count:</span>
+  <%= @admin.sign_in_count %>
+</p>
+
+<p class="lead">
+  <span class="pink">Last sign in:</span>
+  <%= @admin.last_sign_in_at %>
+</p>
+
+<p class="lead">
+  <span class="pink">Remember created:</span>
+  <%= @admin.remember_created_at %>
+</p>
+
+<%= link_to 'Back', admin_admins_path %>

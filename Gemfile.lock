@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/ctran/annotate_models
+  revision: 038b13c04e575cc0f0c89c702c994166c7dc9955
+  specs:
+    annotate (2.6.5)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -31,6 +39,7 @@ GEM
     autoprefixer-rails (3.0.1.20140826)
       execjs
     awesome_print (1.2.0)
+    bcrypt (3.1.7)
     better_errors (2.0.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -69,6 +78,12 @@ GEM
     database_rewinder (0.4.1)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
+    devise (3.3.0)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.2.1)
@@ -80,6 +95,8 @@ GEM
     faker (1.4.3)
       i18n (~> 0.5)
     ffi (1.9.3)
+    font-awesome-rails (4.2.0.0)
+      railties (>= 3.2, < 5.0)
     formatador (0.2.5)
     guard (2.6.1)
       formatador (>= 0.2.4)
@@ -115,6 +132,7 @@ GEM
     mime-types (1.25.1)
     minitest (5.4.1)
     multi_json (1.10.1)
+    orm_adapter (0.5.0)
     polyglot (0.3.5)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -227,12 +245,15 @@ GEM
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     uniform_notifier (1.6.2)
+    warden (1.2.3)
+      rack (>= 1.0)
     yard (0.8.7.4)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate!
   autoprefixer-rails
   better_errors
   binding_of_caller
@@ -241,8 +262,10 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.0.0)
   database_rewinder
+  devise
   factory_girl_rails
   faker
+  font-awesome-rails
   guard
   guard-rspec
   guard-spring

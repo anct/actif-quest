@@ -1,5 +1,6 @@
 class Admin::ExhibitionsController < Admin::BaseController
   before_action :set_admin_exhibition, only: [:show, :edit, :update, :destroy]
+  before_action :set_groups, only: [:new, :edit]
 
   # GET /admin/exhibitions
   # GET /admin/exhibitions.json
@@ -70,5 +71,9 @@ class Admin::ExhibitionsController < Admin::BaseController
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_exhibition_params
       params.require(:exhibition).permit(:name, :introduction, :image_url, :group_id)
+    end
+
+    def set_groups
+      @groups = Group.all
     end
 end
