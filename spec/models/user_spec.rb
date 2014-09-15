@@ -22,6 +22,8 @@ RSpec.describe User, :type => :model do
 
   describe 'associations' do
     it { is_expected.to respond_to(:identities) }
+    it { is_expected.to have_many(:votes) }
+    it { is_expected.to have_many(:voted_exhibitions) }
   end
 
   describe 'validations' do

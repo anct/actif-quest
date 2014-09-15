@@ -19,6 +19,8 @@ RSpec.describe Exhibition, :type => :model do
 
   describe 'associations' do
     it { is_expected.to respond_to(:group) }
+    it { is_expected.to have_many(:votes) }
+    it { is_expected.to have_many(:voted_users) }
   end
 
   describe 'validations' do

@@ -17,6 +17,8 @@
 class User < ActiveRecord::Base
 
   has_many :identities
+  has_many :votes
+  has_many :voted_exhibitions, class_name: Exhibition.name, through: :votes
 
   validates_presence_of :name, :screen_name
   validates_uniqueness_of :name
