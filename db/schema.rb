@@ -47,20 +47,6 @@ ActiveRecord::Schema.define(version: 20140910104913) do
     t.datetime "updated_at"
   end
 
-  create_table "identities", force: true do |t|
-    t.integer  "user_id"
-    t.string   "uid"
-    t.string   "provider"
-    t.string   "token"
-    t.datetime "expires_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "identities", ["uid", "provider"], name: "index_identities_on_uid_and_provider", unique: true
-  add_index "identities", ["uid"], name: "index_identities_on_uid"
-  add_index "identities", ["user_id", "provider"], name: "index_identities_on_user_id_and_provider", unique: true
-
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "screen_name"
