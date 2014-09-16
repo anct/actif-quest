@@ -15,15 +15,10 @@ RSpec.describe Group, :type => :model do
   subject { group }
 
   describe 'associations' do
-    it { is_expected.to respond_to(:exhibitions) }
+    it { is_expected.to have_many(:exhibitions) }
   end
 
   describe 'validations' do
-    it { is_expected.to be_valid }
-
-    context 'w/o name' do
-      before { group.name = nil }
-      it { is_expected.to be_invalid }
-    end
+    it { is_expected.to validate_presence_of(:name) }
   end
 end

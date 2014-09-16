@@ -18,28 +18,15 @@ RSpec.describe Exhibition, :type => :model do
   subject { exhibition }
 
   describe 'associations' do
-    it { is_expected.to respond_to(:group) }
+    it { is_expected.to belong_to(:group) }
     it_behaves_like 'votable' do
       let(:votable) { FactoryGirl.create(:exhibition) }
     end
   end
 
   describe 'validations' do
-    it { is_expected.to be_valid }
-
-    context 'w/o name' do
-      before { exhibition.name = nil }
-      it { is_expected.to be_invalid }
-    end
-
-    context 'w/o introduction' do
-      before { exhibition.introduction = nil }
-      it { is_expected.to be_invalid }
-    end
-
-    context 'w/o group' do
-      before { exhibition.group_id = nil }
-      it { is_expected.to be_invalid }
-    end
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:introduction) }
+    it { is_expected.to validate_presence_of(:group_id) }
   end
 end

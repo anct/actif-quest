@@ -21,55 +21,21 @@ RSpec.describe User, :type => :model do
   subject { user }
 
   describe 'associations' do
-    it { is_expected.to respond_to(:identities) }
+    it { is_expected.to have_many(:identities) }
     it { is_expected.to have_many(:votes) }
     it { is_expected.to have_many(:voted_exhibitions) }
   end
 
   describe 'validations' do
-    it { is_expected.to be_valid }
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_uniqueness_of(:name) }
+    it { is_expected.to ensure_length_of(:name).is_at_most(16) }
+    it { is_expected.to ensure_length_of(:name).is_at_least(5) }
+    it { is_expected.to allow_value('izumin5210').for(:name) }
+    it { is_expected.not_to allow_value('ほげほげ').for(:name) }
+    it { is_expected.not_to allow_value('foo bar').for(:name) }
 
-    context 'w/ name including alphabet and numbers' do
-      before { user.name = 'izumin5210' }
-      it { is_expected.to be_valid }
-    end
-
-    context 'w/o name' do
-      before { user.name = nil }
-      it { is_expected.to be_invalid }
-    end
-
-    context 'w/ invalid name' do
-      context 'including space' do
-        before { user.name = "#{Faker::Name.first_name} #{Faker::Name.last_name}" }
-        it { is_expected.to be_invalid }
-      end
-
-      context 'including unusable character' do
-        before { user.name = 'ほげほげ' }
-        it { is_expected.to be_invalid }
-      end
-
-      context 'that is too short' do
-        before { user.name = 'a' * 4 }
-        it { is_expected.to be_invalid }
-      end
-
-      context 'that is too long' do
-        before { user.name = 'a' * 17 }
-        it { is_expected.to be_invalid }
-      end
-
-      context 'that is not uniqueness' do
-        let(:other_user) { FactoryGirl.build(:user, name: user.name) }
-        it { expect(other_user).to be_invalid }
-      end
-    end
-
-    context 'w/o screen_name' do
-      before { user.screen_name = nil }
-      it { is_expected.to be_invalid }
-    end
+    it { is_expected.to validate_presence_of(:screen_name) }
   end
 
   describe '#vote' do
