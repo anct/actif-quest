@@ -2,7 +2,7 @@ class Admin::UsersController < Admin::BaseController
   before_action :set_admin_user, only: [:show, :destroy]
 
   def index
-    @users = User.all
+    @users = User.order("name").page(params[:page]).per(10)
   end
 
   def show
