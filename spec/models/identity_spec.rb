@@ -25,12 +25,10 @@ RSpec.describe Identity, :type => :model do
   subject { identity }
 
   describe 'associations' do
-    it { is_expected.to respond_to(:user) }
+    it { is_expected.to belong_to(:user) }
   end
 
   describe 'validations' do
-    before { identity }
-
     it 'that combination of provider and user_id is not uniqueness' do
       another_identity = FactoryGirl.build(:identity, uid: identity.uid.reverse)
       expect(another_identity).to be_invalid
