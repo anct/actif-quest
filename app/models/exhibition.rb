@@ -13,9 +13,9 @@
 
 class Exhibition < ActiveRecord::Base
 
+  include Votable
+
   belongs_to :group
-  has_many :votes, as: :votable
-  has_many :voted_users, class_name: User.name, through: :votes
 
   validates :name, presence: true
   validates :introduction, presence: true

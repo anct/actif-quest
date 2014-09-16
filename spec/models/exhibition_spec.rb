@@ -19,8 +19,9 @@ RSpec.describe Exhibition, :type => :model do
 
   describe 'associations' do
     it { is_expected.to respond_to(:group) }
-    it { is_expected.to have_many(:votes) }
-    it { is_expected.to have_many(:voted_users) }
+    it_behaves_like 'votable' do
+      let(:votable) { FactoryGirl.create(:exhibition) }
+    end
   end
 
   describe 'validations' do
