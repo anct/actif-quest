@@ -6,7 +6,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr class="pointer-cursor" data-href="<%= admin_user_path(user) %>">
-        <td><%= group.name %></td>
+        <td><%= user.name %></td>
         <td>
           <%= link_to 'Destroy', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
         </td>
