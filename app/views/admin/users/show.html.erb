@@ -1,18 +1,31 @@
 <p id="notice"><%= notice %></p>
 
-<p class="lead">
-  <span class="pink">Name:</span>
-  <%= @user.name %>
-</p>
+<div class="row">
+  <div class="span4">
+    <p class="lead">
+      <span class="pink">Name:</span>
+      <%= @user.name %>
+    </p>
 
-<p class="lead">
-  <span class="pink">Screen name:</span>
-  <%= @user.screen_name %>
-</p>
+    <p class="lead">
+      <span class="pink">Screen name:</span>
+      <%= @user.screen_name %>
+    </p>
 
-<p class="lead">
-  <span class="pink">Image:</span>
-  <%= @user.image_url %>
-</p>
+    <p class="lead">
+      <span class="pink">Image:</span>
+      <%= @user.image_url %>
+    </p>
+  </div>
+  <div class="span8">
+    <% if @user.statuses.any? %>
+    <h3>Statuses (<%= @user.statuses.count %>)</h3>
+    <ol class="statuses">
+      <%= render @statuses %>
+    </ol>
+    <%= paginate @statuses %>
+    <% end %>
+  </div>
+</div>
 
-<%= link_to 'Back', admin_groups_path %>
+<%= link_to 'Back', admin_users_path %>
