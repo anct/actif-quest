@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140910104913) do
+ActiveRecord::Schema.define(version: 20140914054551) do
+
+  create_table "achievements", force: true do |t|
+    t.string   "name"
+    t.string   "condition"
+    t.string   "description"
+    t.string   "icon_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -31,15 +40,6 @@ ActiveRecord::Schema.define(version: 20140910104913) do
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
-
-  create_table "achievements", force: true do |t|
-    t.string   "name"
-    t.string   "condition"
-    t.string   "description"
-    t.string   "icon_url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "exhibitions", force: true do |t|
     t.string   "name"
@@ -79,13 +79,6 @@ ActiveRecord::Schema.define(version: 20140910104913) do
   end
 
   add_index "users", ["name"], name: "index_users_on_name", unique: true
-
-  create_table "voted_exhibitions", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "exhibition_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "votes", force: true do |t|
     t.integer  "user_id"
