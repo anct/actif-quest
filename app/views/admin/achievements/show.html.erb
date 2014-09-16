@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p class="lead">
+  <span>Name:</span>
+  <%= @achievement.name %>
+</p>
+
+<p class="lead">
+  <span>Condition:</span>
+  <%= @achievement.condition %>
+</p>
+
+<p class="lead">
+  <span>Description:</span>
+  <%= @achievement.description %>
+</p>
+
+<p class="lead">
+  <span>Icon:</span>
+    <%= image_tag(@achievement.icon_url) if @achievement.icon_url.present? %>
+</p>
+
+<%= link_to 'Edit', edit_admin_achievement_path(@achievement) %> |
+<%= link_to 'Back', admin_achievements_path %>
