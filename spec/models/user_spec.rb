@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  screen_name :string(255)
+#  image_url   :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+# Indexes
+#
+#  index_users_on_name  (name) UNIQUE
+#
+
 require 'rails_helper'
 
 RSpec.describe User, :type => :model do
