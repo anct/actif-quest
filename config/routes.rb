@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :admins, :except => [:edit, :update]
     resources :exhibitions
     resources :groups
-    resources :users
+    resources :users, :except => [:new, :edit, :create, :update]
     get '/' => 'home#dashboard'
   end
   # The priority is based upon order of creation: first created -> highest priority.
