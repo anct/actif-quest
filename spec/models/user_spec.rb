@@ -71,4 +71,46 @@ RSpec.describe User, :type => :model do
       it { is_expected.to be_invalid }
     end
   end
+
+  describe '#vote' do
+    create_temp_table(:votable_objects) { |t| true }
+    VotableObject = Class.new(ActiveRecord::Base) { include Votable }
+
+    context 'w/ votable object as argument' do
+      let(:votable) { VotableObject.new }
+      context 'not yet voted' do
+        it { expect { user.vote(votable) }.to change(Vote, :count).by(1) }
+      end
+
+      context 'already voted' do
+        before { user.votes.create!(votable: votable); }
+        it { expect { user.vote(votable) }.to change(Vote, :count).by(0) }
+      end
+    end
+
+    context 'w/ unvotable object as argument' do
+      it { expect { user.vote(Object.new) }.to raise_error(ArgumentError) }
+    end
+  end
+
+  describe '#unvote' do
+    create_temp_table(:votable_objects) { |t| true }
+    VotableObject = Class.new(ActiveRecord::Base) { include Votable }
+
+    context 'w/ votable object as argument' do
+      let(:votable) { VotableObject.new }
+      context 'not yet voted' do
+        it { expect { user.unvote(votable) }.to change(Vote, :count).by(0) }
+      end
+
+      context 'already voted' do
+        before { user.votes.create!(votable: votable); }
+        it { expect { user.unvote(votable) }.to change(Vote, :count).by(-1) }
+      end
+    end
+
+    context 'w/ unvotable object as argument' do
+      it { expect { user.unvote(Object.new) }.to raise_error(ArgumentError) }
+    end
+  end
 end
