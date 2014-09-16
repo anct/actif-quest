@@ -7,7 +7,17 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Admin.create!(
-	email: 'test@example.com',
-	password: 'password',
-	password_confirmation: 'password'
+  email: 'test@example.com',
+  password: 'password',
+  password_confirmation: 'password'
+)
+
+User.create!(
+  name: 'test_user',
+  screen_name: 'test'
+)
+
+Status.create!(
+  user_id: '1',
+  body: 'This is a test status.'
 )
