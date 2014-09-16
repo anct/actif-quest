@@ -1,0 +1,21 @@
+<h1 class="first">ユーザ一覧 <small>- Users</small></h1>
+<br>
+
+<table class="table table-hover table-row-clickable">
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr class="pointer-cursor" data-href="<%= admin_user_path(user) %>">
+        <td><%= user.name %></td>
+        <td>
+          <%= link_to 'Destroy', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @users %><br>
+<%= page_entries_info @users %>
+
+<br>

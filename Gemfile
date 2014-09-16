@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 group :default do
   # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
   gem 'rails', '4.1.5'
@@ -16,7 +15,16 @@ group :default do
   # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
   gem 'turbolinks'
   # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-  gem 'jbuilder', '~> 2.0'  
+  gem 'jbuilder', '~> 2.0'
+  gem 'carrierwave'  
+
+  gem 'bootstrap-sass'
+  gem 'autoprefixer-rails'
+  gem 'font-awesome-rails'
+  gem 'kaminari'
+
+  gem 'devise'
+  gem 'annotate', :git => 'https://github.com/ctran/annotate_models'
 end
 
 group :test, :development do
@@ -27,10 +35,29 @@ end
 group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'spring-commands-rspec'
+
+  gem 'pry-rails'
+  gem 'pry-doc'
+  gem 'pry-stack_explorer'
+  gem 'pry-byebug'
+
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'guard-spring'
+
+  gem 'better_errors'
+  gem 'binding_of_caller'
+
+  gem 'rails_best_practices'
+  gem 'bullet'
 end
 
 group :test do
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'database_rewinder'
+  gem 'faker'
 end
 
 group :doc do

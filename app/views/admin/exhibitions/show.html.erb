@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p class="lead">
+  <span class="pink">Name:</span>
+  <%= @exhibition.name %>
+</p>
+
+<p class="lead">
+  <span class="pink">Introduction:</span>
+  <%= @exhibition.introduction %>
+</p>
+
+<p class="lead">
+  <span class="pink">Image url:</span>
+  <%= image_tag(@exhibition.image_url) if @exhibition.image_url.present? %>
+</p>
+
+<p class="lead">
+  <span class="pink">Group:</span>
+  <%= @exhibition.group_id %>
+</p>
+
+<%= link_to 'Edit', edit_admin_exhibition_path(@exhibition) %> |
+<%= link_to 'Back', admin_exhibitions_path %>

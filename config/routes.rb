@@ -1,4 +1,23 @@
 Rails.application.routes.draw do
+
+  devise_for :admins, only: [:sign_in, :sign_out, :session], controllers: {
+      sessions: "admins/sessions",
+      registrations: "admins/registrations"
+    }
+
+  devise_scope :admin do
+    get 'admins/edit' => 'admins/registrations#edit', as: 'edit_admin_registration'
+    patch 'admins' => 'admins/registrations#update'
+    put 'admins' => 'admins/registrations#update'
+  end
+
+  namespace :admin do
+    resources :admins, :except => [:edit, :update]
+    resources :exhibitions
+    resources :groups
+    resources :users
+    get '/' => 'home#dashboard'
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
