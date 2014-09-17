@@ -6,18 +6,25 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Admin.all.delete_all(nil, hard: true)
+User.delete_all(nil, hard: true)
+Status.delete_all(nil, hard: true)
+
 Admin.create!(
   email: 'test@example.com',
   password: 'password',
   password_confirmation: 'password'
 )
 
-User.create!(
-  name: 'test_user',
-  screen_name: 'test'
-)
+users = (0...30).map do |i|
+		User.create!(
+ 		 	name: "test_user#{i}",
+  		screen_name: "テストユーザ#{i}"
+		)
+	end
 
-Status.create!(
-  user_id: '1',
-  body: 'This is a test status.'
-)
+users.each do |user|
+	30.times do |i|
+		user.statuses.create!(body: "This is a test status#{i}.")
+	end
+end
