@@ -9,6 +9,8 @@
 Admin.all.delete_all(nil, hard: true)
 User.delete_all(nil, hard: true)
 Status.delete_all(nil, hard: true)
+Group.delete_all(nil, hard: true)
+Exhibition.delete_all(nil, hard: true)
 
 Admin.create!(
   email: 'test@example.com',
@@ -26,5 +28,18 @@ users = (0...30).map do |i|
 users.each do |user|
 	30.times do |i|
 		user.statuses.create!(body: "This is a test status#{i}.")
+	end
+end
+
+groups = (0...30).map do |i|
+		Group.create!(name: "test_group#{i}")
+end
+
+groups.each do |group|
+	2.times do |i|
+		group.exhibitions.create!(
+			name: "test_exhibition#{i}",
+			introduction: "This is a test exhibition#{i}."
+		)
 	end
 end
