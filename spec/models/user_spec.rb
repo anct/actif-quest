@@ -8,6 +8,7 @@
 #  image_url   :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
+#  deleted_at  :datetime
 #
 # Indexes
 #
