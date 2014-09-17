@@ -26,6 +26,8 @@ group :default do
   gem 'kakurenbo'
   gem 'devise'
   gem 'annotate', :git => 'https://github.com/ctran/annotate_models'
+
+  gem 'active_model_serializers'
 end
 
 group :test, :development do
