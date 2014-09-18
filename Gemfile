@@ -62,6 +62,7 @@ group :test do
   gem 'database_rewinder'
   gem 'faker'
   gem 'shoulda-matchers', require: false
+  gem 'json_spec'
 end
 
 group :doc do
