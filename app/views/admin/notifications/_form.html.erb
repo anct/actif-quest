@@ -1,0 +1,25 @@
+<%= form_for([:admin, @notification], html: {class: "form-horizontal"}) do |f| %>
+  <% if @notification.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@notification.errors.count, "error") %> prohibited this admin_notification from being saved:</h2>
+
+      <ul>
+      <% @notification.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="form-notification">
+      <%= f.label :content, class: "col-sm-3 control-label" %>
+      <div class="col-sm-9">
+        <%= f.text_area :content, autofocus: true, placeholder: "Content", :class => "form-control" %>
+        <br>
+      </div>
+    </div>
+    <div class="form-notification">
+      <%= f.submit :class => "btn btn-primary" %>
+    </div>
+  <br>
+<% end %>

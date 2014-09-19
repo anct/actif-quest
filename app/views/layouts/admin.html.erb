@@ -22,13 +22,14 @@
           <a href="<%= admin_groups_path %>" class="list-group-item">グループ(部活) <small>- Groups</small></a>
           <a href="<%= admin_admins_path %>" class="list-group-item">管理者 <small>- Admins</small></a>
           <a href="<%= admin_users_path %>" class="list-group-item">ユーザ <small>- Users</small></a>
+          <a href="<%= admin_notifications_path %>" class="list-group-item">お知らせ <small>- Notifications</small></a>
         </div>
       </div>
       <div class="col-md-9">
         <% if admin_signed_in? %>
           Logged in as <strong><%= current_admin.email %></strong>.
           <%= link_to 'Edit profile', edit_admin_registration_path, :class => 'navbar-link' %> |
-          <%= link_to "Logout", destroy_admin_session_path, method: :delete, :class => 'navbar-link'  %>
+          <%= link_to "Logout", destroy_admin_session_path, method: :delete, :class => 'navbar-link' %>
         <% end %>
         <%= yield %>
       </div>

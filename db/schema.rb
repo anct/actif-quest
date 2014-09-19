@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140914054551) do
+ActiveRecord::Schema.define(version: 20140917132336) do
 
   create_table "achievements", force: true do |t|
     t.string   "name"
@@ -70,12 +70,27 @@ ActiveRecord::Schema.define(version: 20140914054551) do
   add_index "identities", ["uid"], name: "index_identities_on_uid"
   add_index "identities", ["user_id", "provider"], name: "index_identities_on_user_id_and_provider", unique: true
 
+  create_table "notifications", force: true do |t|
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "statuses", force: true do |t|
+    t.integer  "user_id"
+    t.string   "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "deleted_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "screen_name"
     t.string   "image_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "deleted_at"
   end
 
   add_index "users", ["name"], name: "index_users_on_name", unique: true
