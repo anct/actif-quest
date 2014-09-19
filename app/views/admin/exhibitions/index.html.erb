@@ -9,8 +9,8 @@
         <td><%= exhibition.name %></td>
         <td><%= exhibition.group_id %></td>
         <td>
-          <%= link_to 'Edit', edit_admin_exhibition_path(exhibition), class: "btn btn-primary" %>
-          <%= link_to 'Destroy', admin_exhibition_path(exhibition), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+          <%= admin_action_btn 'Edit', edit_admin_exhibition_path(exhibition) %>
+          <%= admin_action_btn 'Destroy', admin_exhibition_path(exhibition), method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>

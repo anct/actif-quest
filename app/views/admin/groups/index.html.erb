@@ -8,8 +8,8 @@
       <tr class="pointer-cursor" data-href="<%= admin_group_path(group) %>">
         <td><%= group.name %></td>
         <td>
-          <%= link_to 'Edit', edit_admin_group_path(group), class: "btn btn-primary" %>
-          <%= link_to 'Destroy', admin_group_path(group), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+          <%= admin_action_btn 'Edit', edit_admin_group_path(group) %>
+          <%= admin_action_btn 'Destroy', admin_group_path(group), method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>
