@@ -14,7 +14,7 @@
 
 FactoryGirl.define do
   factory :status do
-    user_id 1
-    body "MyString"
+    body { Faker::Lorem.paragraph }
+    user
   end
 end

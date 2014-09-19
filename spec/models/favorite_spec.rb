@@ -13,5 +13,14 @@
 require 'rails_helper'
 
 RSpec.describe Favorite, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { Favorite.new }
+
+  describe 'associations' do
+    it { is_expected.to belong_to :user }
+    it { is_expected.to belong_to :votable }
+  end
+
+  describe 'validations' do
+    it { is_expected.to validate_uniqueness_of(:user_id).scoped_to([:favorable_id, :favorable_type]) }
+  end
 end
