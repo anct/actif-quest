@@ -9,5 +9,5 @@
 #
 
 class Notification < ActiveRecord::Base
-	validates :content, presence: true
+  validates :content, presence: true
 end
