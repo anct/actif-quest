@@ -1,5 +1,5 @@
 class StatusesController < ApplicationController
-	def create
+  def create
     @status = current_user.statuses.build(status_params)
     if @status.save
       flash[:success] = "Status created!"
