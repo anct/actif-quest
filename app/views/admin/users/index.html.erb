@@ -7,8 +7,11 @@
     <% @users.each do |user| %>
       <tr class="pointer-cursor" data-href="<%= admin_user_path(user) %>">
         <td><%= user.name %></td>
+        <td><%= user.screen_name %></td>
+        <td><%= user.created_at.to_s(:db) %></td>
+        <td><%= user.statuses.size %></td>
         <td>
-          <%= link_to 'Destroy', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+          <%= admin_action_btn 'Destroy', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>
