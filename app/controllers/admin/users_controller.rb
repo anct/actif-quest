@@ -6,6 +6,8 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def show
+    @user = User.find(params[:id])
+    @statuses = @user.statuses.page(params[:page])
   end
 
   def destroy

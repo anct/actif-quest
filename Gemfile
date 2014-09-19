@@ -23,6 +23,7 @@ group :default do
   gem 'font-awesome-rails'
   gem 'kaminari'
 
+  gem 'kakurenbo'
   gem 'devise'
   gem 'annotate', :git => 'https://github.com/ctran/annotate_models'
 end
