@@ -18,11 +18,11 @@
     <div class="row">
       <div class="col-md-3">
         <div class="list-group">
-          <a href="<%= admin_exhibitions_path %>" class="list-group-item">展示 <small>- Exhibitions</small></a>
-          <a href="<%= admin_groups_path %>" class="list-group-item">グループ(部活) <small>- Groups</small></a>
-          <a href="<%= admin_admins_path %>" class="list-group-item">管理者 <small>- Admins</small></a>
-          <a href="<%= admin_users_path %>" class="list-group-item">ユーザ <small>- Users</small></a>
-          <a href="<%= admin_notifications_path %>" class="list-group-item">お知らせ <small>- Notifications</small></a>
+          <%= admin_menu_item "展示", admin_exhibitions_path %>
+          <%= admin_menu_item "グループ", admin_groups_path %>
+          <%= admin_menu_item "管理者", admin_admins_path %>
+          <%= admin_menu_item "ユーザ", admin_users_path %>
+          <%= admin_menu_item "お知らせ", admin_notifications_path %>
         </div>
       </div>
       <div class="col-md-9">
