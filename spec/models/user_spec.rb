@@ -80,4 +80,56 @@ RSpec.describe User, :type => :model do
       it { expect { user.unvote(Object.new) }.to raise_error(ArgumentError) }
     end
   end
+
+  describe '#post' do
+    context 'w/ valid argument' do
+      it { expect { user.post('こころぴょんぴょん') }.to change(Status, :count).by(1) }
+    end
+
+    context 'w/ valid argument' do
+      it { expect { user.post(nil) }.to raise_error(ArgumentError) }
+    end
+  end
+
+  describe '#fav' do
+    create_temp_table(:favorable_objects) { |t| true }
+    FavorableObject = Class.new(ActiveRecord::Base) { include Favorable }
+
+    context 'w/ favorable object as argument' do
+      let(:favorable) { FavorableObject.new }
+      context 'not yet faved' do
+        it { expect { user.fav(favorable) }.to change(Favorite, :count).by(1) }
+      end
+
+      context 'already faved' do
+        before { user.favorites.create!(favorable: favorable); }
+        it { expect { user.fav(favorable) }.to change(Favorite, :count).by(0) }
+      end
+    end
+
+    context 'w/ unfavorable object as argument' do
+      it { expect { user.fav(Object.new) }.to raise_error(ArgumentError) }
+    end
+  end
+
+  describe '#unfav' do
+    create_temp_table(:favorable_objects) { |t| true }
+    FavorableObject = Class.new(ActiveRecord::Base) { include Favorable }
+
+    context 'w/ favorable object as argument' do
+      let(:favorable) { FavorableObject.new }
+      context 'not yet faved' do
+        it { expect { user.unfav(favorable) }.to change(Favorite, :count).by(0) }
+      end
+
+      context 'already faved' do
+        before { user.favorites.create!(favorable: favorable); }
+        it { expect { user.unfav(favorable) }.to change(Favorite, :count).by(-1) }
+      end
+    end
+
+    context 'w/ unfavorable object as argument' do
+      it { expect { user.unfav(Object.new) }.to raise_error(ArgumentError) }
+    end
+  end
 end

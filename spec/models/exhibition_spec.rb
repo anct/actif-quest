@@ -20,7 +20,7 @@ RSpec.describe Exhibition, :type => :model do
   describe 'associations' do
     it { is_expected.to belong_to(:group) }
     it_behaves_like 'votable' do
-      let(:votable) { FactoryGirl.create(:exhibition) }
+      let(:votable) { exhibition }
     end
   end
 
