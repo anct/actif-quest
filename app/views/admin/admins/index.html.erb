@@ -9,8 +9,8 @@
         <td><%= admin.name %></td>
         <td><%= admin.email %></td>
         <td><%= admin.sign_in_count %> sign in</td>
-        <td><%= admin.last_sign_in_at %></td>
-        <td><%= admin.remember_created_at %></td>
+        <td><%= admin.last_sign_in_at.to_s(:db) %></td>
+        <td><%= admin.created_at.to_s(:db) %></td>
         <td>
           <%= admin_action_btn 'Destroy', admin_admin_path(admin), method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
