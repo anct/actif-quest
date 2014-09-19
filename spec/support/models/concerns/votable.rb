@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 shared_examples 'votable' do
   subject { votable }
   describe 'associations' do
