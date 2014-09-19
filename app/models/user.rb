@@ -25,6 +25,11 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_format_of :name, with: /\A(\w)+\Z/
   validates_length_of :name, within: 5..16
+  
+  def post(body)
+    raise ArgumentError if body.blank?
+    self.statuses.create(body: body)
+  end
 
   def vote(votable)
     raise ArgumentError unless votable.respond_to? :votes
