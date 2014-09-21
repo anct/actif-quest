@@ -12,7 +12,7 @@
 
 class Status < ActiveRecord::Base
 
-	include Favorable
+  include Favorable
 
   belongs_to :user
   
