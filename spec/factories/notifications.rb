@@ -12,6 +12,6 @@
 
 FactoryGirl.define do
   factory :notification do
-    content "MyText"
+    content { Faker::Lorem.paragraph }
   end
 end
