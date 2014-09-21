@@ -15,9 +15,8 @@
 
 FactoryGirl.define do
   factory :achievement do
-    name "MyString"
-    condition "MyString"
-    description "MyString"
-    icon_url "MyString"
+    name { Faker::Name.title }
+    condition { Faker::Lorem.paragraph }
+    description { Faker::Lorem.paragraph }
   end
 end
