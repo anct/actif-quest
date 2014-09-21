@@ -33,6 +33,11 @@ class User < ActiveRecord::Base
     self.favorites.create(favorable: favorable)
   end
 
+  def unfav(favorable)
+    raise ArgumentError unless favorable.respond_to? :favorites
+    self.favorites.find_by(favorable: favorable).try(:destroy)
+  end
+
   def post(body)
     raise ArgumentError if body.blank?
     self.statuses.create(body: body)
