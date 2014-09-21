@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :exhibitions, only: [:index, :show]
     resources :achievements, only: [:index]
+    resources :users, only: [:show]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
