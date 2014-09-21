@@ -28,6 +28,8 @@ module ActifQuest
     config.i18n.default_locale = :ja
 
     config.generators do |g|
+      g.javascripts false
+      g.stylesheets false
       g.test_framework :rspec,
         fixture: true,
         view_specs: false,

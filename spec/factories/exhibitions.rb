@@ -15,8 +15,8 @@
 
 FactoryGirl.define do
   factory :exhibition do
-    name { Faker::Company.name }
+    name { Faker::Name.title }
     introduction { Faker::Lorem.paragraph }
-    group { create :group }
+    group
   end
 end

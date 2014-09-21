@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe Admin::SessionsController, :type => :controller do
+RSpec.describe Admins::SessionsController, :type => :controller do
 
 end

@@ -86,7 +86,7 @@ RSpec.describe User, :type => :model do
       it { expect { user.post('こころぴょんぴょん') }.to change(Status, :count).by(1) }
     end
 
-    context 'w/ valid argument' do
+    context 'w/ invalid argument' do
       it { expect { user.post(nil) }.to raise_error(ArgumentError) }
     end
   end

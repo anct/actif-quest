@@ -26,6 +26,8 @@ group :default do
   gem 'kakurenbo'
   gem 'devise'
   gem 'annotate', :git => 'https://github.com/ctran/annotate_models'
+
+  gem 'active_model_serializers'
 end
 
 group :test, :development do
@@ -60,6 +62,7 @@ group :test do
   gem 'database_rewinder'
   gem 'faker'
   gem 'shoulda-matchers', require: false
+  gem 'json_spec'
 end
 
 group :doc do

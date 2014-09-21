@@ -42,6 +42,10 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
+  config.include Devise::TestHelpers, type: :controller
+  config.include JsonSpec::Helpers
+  config.include ControllerMacros, type: :controller
+
   config.before :all do
     FactoryGirl.reload
   end

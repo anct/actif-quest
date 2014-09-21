@@ -22,6 +22,8 @@ GEM
       activesupport (= 4.1.5)
       builder (~> 3.1)
       erubis (~> 2.7.0)
+    active_model_serializers (0.9.0)
+      activemodel (>= 3.2)
     activemodel (4.1.5)
       activesupport (= 4.1.5)
       builder (~> 3.1)
@@ -120,6 +122,9 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
+    json_spec (1.1.2)
+      multi_json (~> 1.0)
+      rspec (>= 2.0, < 4.0)
     kakurenbo (0.2.2)
       activerecord (>= 4.0.2)
     kaminari (0.16.1)
@@ -260,6 +265,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers
   annotate!
   autoprefixer-rails
   better_errors
@@ -278,6 +284,7 @@ DEPENDENCIES
   guard-spring
   jbuilder (~> 2.0)
   jquery-rails
+  json_spec
   kakurenbo
   kaminari
   pry-byebug
