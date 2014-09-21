@@ -11,4 +11,9 @@
 #
 
 class Favorite < ActiveRecord::Base
+  
+  belongs_to :user
+  belongs_to :favorable, polymorphic: true
+
+  validates :user_id, uniqueness: { scope: [:favorable_id, :favorable_type] }
 end

@@ -11,8 +11,13 @@
 #
 
 class Status < ActiveRecord::Base
+
+  include Favorable
+
   belongs_to :user
+  
   default_scope -> { order('created_at DESC') }
+
   validates :user_id, presence: true
   validates :body, presence: true
 end

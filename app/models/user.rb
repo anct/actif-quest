@@ -19,12 +19,29 @@ class User < ActiveRecord::Base
   has_many :identities
   has_many :votes
   has_many :voted_exhibitions, class_name: Exhibition.name, through: :votes
+  has_many :favorites
+  has_many :favorite_statuses, class_name: Status.name, through: :favorites
   has_many :statuses, dependent: :destroy
   
   validates_presence_of :name, :screen_name
   validates_uniqueness_of :name
   validates_format_of :name, with: /\A(\w)+\Z/
   validates_length_of :name, within: 5..16
+
+  def fav(favorable)
+    raise ArgumentError unless favorable.respond_to? :favorites
+    self.favorites.create(favorable: favorable)
+  end
+
+  def unfav(favorable)
+    raise ArgumentError unless favorable.respond_to? :favorites
+    self.favorites.find_by(favorable: favorable).try(:destroy)
+  end
+
+  def post(body)
+    raise ArgumentError if body.blank?
+    self.statuses.create(body: body)
+  end
 
   def vote(votable)
     raise ArgumentError unless votable.respond_to? :votes
