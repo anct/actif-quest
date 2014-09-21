@@ -34,7 +34,6 @@ end
 
 shared_examples check_status.call('#create') do |model_class|
   lower_name = model_class.name.downcase
-  before { sign_in_as_admin }
   before do
     sign_in_as_admin
     instance_variable_set("@#{lower_name}_params", attributes_with_foreign_keys(lower_name))
