@@ -12,10 +12,18 @@
 #
 # Indexes
 #
-#  index_users_on_name  (name) UNIQUE
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_name                  (name) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: [:facebook, :twitter]
+
   has_many :identities
   has_many :votes
   has_many :voted_exhibitions, class_name: Exhibition.name, through: :votes
