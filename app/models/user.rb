@@ -28,6 +28,11 @@ class User < ActiveRecord::Base
   validates_format_of :name, with: /\A(\w)+\Z/
   validates_length_of :name, within: 5..16
 
+  def fav(favorable)
+    raise ArgumentError unless favorable.respond_to? :favorites
+    self.favorites.create(favorable: favorable)
+  end
+
   def post(body)
     raise ArgumentError if body.blank?
     self.statuses.create(body: body)
