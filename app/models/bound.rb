@@ -1,6 +1,6 @@
 class Bound < ActiveRecord::Base
 
-	has_many :beacons
+  has_many :beacons
 
-	validates_presence_of :name
+  validates_presence_of :name
 end
