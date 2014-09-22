@@ -2,13 +2,23 @@
 #
 # Table name: users
 #
-#  id          :integer          not null, primary key
-#  name        :string(255)
-#  screen_name :string(255)
-#  image_url   :string(255)
-#  created_at  :datetime
-#  updated_at  :datetime
-#  deleted_at  :datetime
+#  id                     :integer          not null, primary key
+#  name                   :string(255)
+#  screen_name            :string(255)
+#  image_url              :string(255)
+#  created_at             :datetime
+#  updated_at             :datetime
+#  deleted_at             :datetime
+#  email                  :string(255)
+#  encrypted_password     :string(255)
+#  reset_password_token   :string(255)
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default(0), not null
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :string(255)
+#  last_sign_in_ip        :string(255)
 #
 # Indexes
 #
@@ -21,7 +31,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
+         :recoverable, :rememberable, :trackable,
          :omniauthable, omniauth_providers: [:facebook, :twitter]
 
   has_many :identities
@@ -59,5 +69,27 @@ class User < ActiveRecord::Base
   def unvote(votable)
     raise ArgumentError unless votable.respond_to? :votes
     self.votes.find_by(votable: votable).try(:destroy)
+  end
+
+  def has_provider?(provider)
+    self.identities.any? { |i| i.provider == provider.to_s }
+  end
+
+  def add_identity(auth)
+    self.identities << Identity.create_from_omniauth(auth)
+  end
+
+  def self.find_by_auth_params(auth)
+    Identity.find_by(provider: auth.provider, uid: auth.uid).try(:user)
+  end
+
+  def self.create_from_omniauth(auth)
+    transaction do
+      User.create!(
+        name: auth.info.nickname.presence || auth.info.name.gsub(/\s/, '_'),
+        screen_name: auth.info.name,
+        image_url: auth.info.image
+      ).tap { |user| user.add_identity(auth) }
+    end
   end
 end

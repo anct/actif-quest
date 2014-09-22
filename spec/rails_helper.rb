@@ -44,6 +44,7 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, type: :controller
   config.include JsonSpec::Helpers
+  config.include ModelMacros, type: :model
   config.include ControllerMacros, type: :controller
 
   config.before :all do

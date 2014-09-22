@@ -2,13 +2,23 @@
 #
 # Table name: users
 #
-#  id          :integer          not null, primary key
-#  name        :string(255)
-#  screen_name :string(255)
-#  image_url   :string(255)
-#  created_at  :datetime
-#  updated_at  :datetime
-#  deleted_at  :datetime
+#  id                     :integer          not null, primary key
+#  name                   :string(255)
+#  screen_name            :string(255)
+#  image_url              :string(255)
+#  created_at             :datetime
+#  updated_at             :datetime
+#  deleted_at             :datetime
+#  email                  :string(255)
+#  encrypted_password     :string(255)
+#  reset_password_token   :string(255)
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default(0), not null
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :string(255)
+#  last_sign_in_ip        :string(255)
 #
 # Indexes
 #
@@ -132,6 +142,41 @@ RSpec.describe User, :type => :model do
 
     context 'w/ unfavorable object as argument' do
       it { expect { user.unfav(Object.new) }.to raise_error(ArgumentError) }
+    end
+  end
+
+  describe '#has_provider?' do
+    before { user.identities << FactoryGirl.create(:identity, provider: 'twitter') }
+    context 'w/ provider that already authenticated' do
+      it { expect(user.has_provider?(:twitter)).to be_truthy }
+    end
+    context 'w/ provider that not yet authenticated' do
+      it { expect(user.has_provider?(:facebook)).to be_falsy }
+    end
+  end
+
+  describe '#add_identity' do
+    context 'w/ valid argument' do
+      it { expect { user.add_identity(auth_params) }.to change(user.identities, :count).by(1) }
+    end
+  end
+
+  describe '.find_by_auth_params' do
+    context 'when user is exists' do
+      before { user.identities << FactoryGirl.create(:identity, provider: :twitter, uid: '123456') }
+      it { expect(User.find_by_auth_params(auth_params)).to eq user }
+    end
+
+    context 'when user is not exists' do
+      before { user.identities << FactoryGirl.create(:identity, provider: :facebook, uid: '123456') }
+      it { expect(User.find_by_auth_params(auth_params)).to be_nil }
+    end
+  end
+
+  describe '.create_from_omniauth' do
+    context 'w/ valid argument' do
+      it { expect { User.create_from_omniauth(auth_params) }.to change(User, :count).by(1) }
+      it { expect { User.create_from_omniauth(auth_params) }.to change(Identity, :count).by(1) }
     end
   end
 end
