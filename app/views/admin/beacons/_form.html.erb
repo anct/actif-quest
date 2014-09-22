@@ -1,0 +1,67 @@
+<%= form_for([:admin, @bound, @beacon], html: {class: "form-horizontal"}) do |f| %>
+<% if @beacon.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@beacon.errors.count, "error") %> prohibited this admin_beacon from being saved:</h2>
+
+  <ul>
+    <% @beacon.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="form-group">
+  <%= f.label :UUID, class: "col-sm-3 control-label" %>
+  <div class="col-sm-9">
+    <%= f.text_field :uuid, autofocus: true, placeholder: "UUID", class: "form-control" %>
+    <br>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :minor, class: "col-sm-3 control-label" %>
+  <div class="col-sm-9">
+    <%= f.text_field :minor, placeholder: "minor", class: "form-control" %>
+    <br>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :major, class: "col-sm-3 control-label" %>
+  <div class="col-sm-9">
+    <%= f.text_field :major, placeholder: "major", class: "form-control" %>
+    <br>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :latitude, class: "col-sm-3 control-label" %>
+  <div class="col-sm-9">
+    <%= f.text_field :latitude, placeholder: "latitude", class: "form-control" %>
+    <br>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :longitude, class: "col-sm-3 control-label" %>
+  <div class="col-sm-9">
+    <%= f.text_field :longitude, placeholder: "longitude", class: "form-control" %>
+    <br>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :floor, class: "col-sm-3 control-label" %>
+  <div class="col-sm-9">
+    <%= f.text_field :floor, placeholder: "floor", class: "form-control" %>
+    <br>
+  </div>
+</div>
+
+<br>
+<div class="actions">
+  <%= f.submit class: "btn btn-primary" %>
+</div>
+<br>
+<% end %>

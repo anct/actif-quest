@@ -1,0 +1,24 @@
+<h3>Beacon<%= @beacons.index(beacon)+1 %>
+<%# TODO: Destroyメソッド実装したら動くようになります %>
+  <%= admin_action_btn 'Edit', edit_admin_bound_beacon_path(beacon.bound, beacon) %>
+  <%= admin_action_btn 'Destroy', admin_bound_beacon_path(beacon.bound,beacon), method: :delete, data: { confirm: 'Are you sure?' } %>
+</h3>
+<p class="lead">UUID: <%= beacon.uuid %></p>
+<table class="table">
+  <tr>
+    <th>minor</th>
+    <th>major</th>
+    <th>latitude</th>
+    <th>longitude</th>
+    <th>floor</th>
+  </tr>
+  <tr>
+    <td><%= beacon.minor %></td>
+    <td><%= beacon.major %></td>
+    <td><%= beacon.latitude %></td>
+    <td><%= beacon.longitude %></td>
+    <td><%= beacon.floor %></td>
+  </tr>
+</table>
+<br>
+<%# TODO: Bootstrapでなんとかする cf:col-md-3 %>
