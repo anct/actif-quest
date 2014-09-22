@@ -1,0 +1,21 @@
+<h1 class="first">エリア一覧 <small>- Bounds</small></h1>
+<br>
+
+<table class="table table-hover table-row-clickable">
+
+  <tbody>
+    <% @bounds.each do |bound| %>
+      <tr class="pointer-cursor" data-href="<%= admin_bound_path(bound) %>">
+        <td><%= bound.name %></td>
+        <td>
+          <%= admin_action_btn 'Edit', edit_admin_bound_path(bound) %>
+          <%= admin_action_btn 'Destroy', admin_bound_path(bound), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Bound', new_admin_bound_path %>
