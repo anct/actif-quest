@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20140922010136) do
     t.datetime "expires_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "secret"
   end
 
   add_index "identities", ["uid", "provider"], name: "index_identities_on_uid_and_provider", unique: true

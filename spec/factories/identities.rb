@@ -10,6 +10,7 @@
 #  expires_at :datetime
 #  created_at :datetime
 #  updated_at :datetime
+#  secret     :string(255)
 #
 # Indexes
 #
