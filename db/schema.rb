@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140919060804) do
+ActiveRecord::Schema.define(version: 20140922010136) do
 
   create_table "achievements", force: true do |t|
     t.string   "name"
@@ -40,6 +40,24 @@ ActiveRecord::Schema.define(version: 20140919060804) do
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+
+  create_table "beacons", force: true do |t|
+    t.string   "uuid"
+    t.integer  "minor"
+    t.integer  "major"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "floor"
+    t.integer  "bound_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bounds", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "exhibitions", force: true do |t|
     t.string   "name"
