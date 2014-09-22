@@ -6,6 +6,7 @@ class Admin::BoundsController < Admin::BaseController
   end
 
   def show
+    @beacons = @bound.beacons
   end
 
   def new

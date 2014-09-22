@@ -7,6 +7,7 @@
     <% @bounds.each do |bound| %>
       <tr class="pointer-cursor" data-href="<%= admin_bound_path(bound) %>">
         <td><%= bound.name %></td>
+        <td><%#= @bound.beacons.count %></td>
         <td>
           <%= admin_action_btn 'Edit', edit_admin_bound_path(bound) %>
           <%= admin_action_btn 'Destroy', admin_bound_path(bound), method: :delete, data: { confirm: 'Are you sure?' } %>
