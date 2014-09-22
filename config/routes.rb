@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :achievements, only: [:index]
     resources :users, only: [:show]
     resources :statuses, only: [:index]
+    resources :notifications, only: [:index]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
