@@ -1,9 +1,6 @@
 class Admin::BeaconsController < Admin::BaseController
 	before_action :set_admin_beacon, only: [:edit, :update, :destroy]
-
-	def new
-		@beacon = Beacon.new
-	end
+  before_action :set_admin_bound, only: [:new, :edit, :create, :update, :destroy]
 
 	def new
 		@beacon = Beacon.new
@@ -13,11 +10,11 @@ class Admin::BeaconsController < Admin::BaseController
 	end
 
 	def create
-		@beacon = Beacon.new(admin_beacon_params)
+		@beacon = @bound.beacons.build(admin_beacon_params)
 
 		respond_to do |format|
       if @beacon.save
-        format.html { redirect_to admin_beacons_url, notice: 'Beacon was successfully created.' }
+        format.html { redirect_to admin_bound_path(@bound), notice: 'Beacon was successfully created.' }
         format.json { render :show, status: :ok, location: @beacon }
       else
         format.html { render :edit }
@@ -29,7 +26,7 @@ class Admin::BeaconsController < Admin::BaseController
     def update
     respond_to do |format|
       if @beacon.update(admin_beacon_params)
-        format.html { redirect_to admin_beacons_url, notice: 'Beacon was successfully updated.' }
+        format.html { redirect_to admin_bound_path(@beacon.bound), notice: 'Beacon was successfully updated.' }
         format.json { render :show, status: :ok, location: @beacon }
       else
         format.html { render :edit }
@@ -40,12 +37,17 @@ class Admin::BeaconsController < Admin::BaseController
 
   def destroy
     respond_to do |format|
-      format.html { redirect_to admin_beacons_url, notice: 'Beacon was successfully destroyed.' }
+      format.html { redirect_to admin_bound_path(@bound), notice: 'Beacon was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
 private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_admin_bound
+      @bound = Bound.find(params[:bound_id])
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_beacon
       @beacon = Beacon.find(params[:id])
