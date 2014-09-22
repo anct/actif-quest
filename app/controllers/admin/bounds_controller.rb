@@ -43,6 +43,7 @@ class Admin::BoundsController < Admin::BaseController
   end
 
   def destroy
+    @bound.destroy
     respond_to do |format|
       format.html { redirect_to admin_bounds_url, notice: 'Bound was successfully destroyed.' }
       format.json { head :no_content }

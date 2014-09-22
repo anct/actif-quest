@@ -36,6 +36,7 @@ class Admin::BeaconsController < Admin::BaseController
   end
 
   def destroy
+    @beacon.destroy
     respond_to do |format|
       format.html { redirect_to admin_bound_path(@bound), notice: 'Beacon was successfully destroyed.' }
       format.json { head :no_content }
