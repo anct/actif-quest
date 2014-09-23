@@ -1,18 +1,18 @@
 class Admin::BeaconsController < Admin::BaseController
-	before_action :set_admin_beacon, only: [:edit, :update, :destroy]
+  before_action :set_admin_beacon, only: [:edit, :update, :destroy]
   before_action :set_admin_bound, only: [:new, :edit, :create, :update, :destroy]
 
-	def new
-		@beacon = Beacon.new
-	end
+  def new
+    @beacon = Beacon.new
+  end
 
-	def edit
-	end
+  def edit
+  end
 
-	def create
-		@beacon = @bound.beacons.build(admin_beacon_params)
+  def create
+    @beacon = @bound.beacons.build(admin_beacon_params)
 
-		respond_to do |format|
+    respond_to do |format|
       if @beacon.save
         format.html { redirect_to admin_bound_path(@bound), notice: 'Beacon was successfully created.' }
         format.json { render :show, status: :ok, location: @beacon }
