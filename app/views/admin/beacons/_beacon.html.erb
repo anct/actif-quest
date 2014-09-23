@@ -1,0 +1,20 @@
+  <h4>Beacon<%= @beacons.index(beacon)+1 %>
+    <%= admin_action_btn_sm 'Edit', edit_admin_bound_beacon_path(beacon.bound, beacon) %>
+    <%= admin_action_btn_sm 'Destroy', admin_bound_beacon_path(beacon.bound,beacon), method: :delete, data: { confirm: 'Are you sure?' } %>
+  </h4>
+  <p class="lead">UUID: <%= beacon.uuid %></p>
+
+  <div class="row">
+    <div class="col-md-4">
+      <p class="lead">minor: <%= beacon.minor %></p>
+      <p class="lead">latitude: <%= beacon.latitude %></p>
+    </div>
+    <div class="col-md-4">
+      <p class="lead">major: <%= beacon.major %></p>
+      <p class="lead">longitude: <%= beacon.longitude %></p>
+    </div>
+    <div class="col-md-4">
+      <p class="lead">floor: <%= beacon.floor %></p>
+    </div>
+  </div>
+  <br>

@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :achievements
     resources :admins, :except => [:edit, :update]
+    resources :bounds do
+      resources :beacons
+    end
     resources :exhibitions
     resources :groups
     resources :notifications
