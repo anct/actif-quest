@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable,
          :omniauthable, omniauth_providers: [:facebook, :twitter]
 
-  has_many :identities
+  has_many :identities, dependent: :delete_all
   has_many :votes
   has_many :voted_exhibitions, class_name: Exhibition.name, through: :votes
   has_many :favorites
