@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   devise_scope :admin do
     get 'admins/edit' => 'admins/registrations#edit', as: 'edit_admin_registration'
-    patch 'admins' => 'admins/registrations#update'
+    patch 'admins' => 'admins/registrations#update', as: 'admin_registration'
     put 'admins' => 'admins/registrations#update'
   end
 
