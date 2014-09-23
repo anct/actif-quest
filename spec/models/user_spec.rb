@@ -19,9 +19,11 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
+#  authentication_token   :string(255)
 #
 # Indexes
 #
+#  index_users_on_authentication_token  (authentication_token)
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_name                  (name) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
@@ -32,6 +34,10 @@ require 'rails_helper'
 RSpec.describe User, :type => :model do
   let(:user) { FactoryGirl.create(:user) }
   subject { user }
+
+  it_behaves_like 'token authenticatable' do
+    let(:token_authenticatable) { user }
+  end
 
   describe 'associations' do
     it { is_expected.to have_many(:identities) }

@@ -19,9 +19,11 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
+#  authentication_token   :string(255)
 #
 # Indexes
 #
+#  index_users_on_authentication_token  (authentication_token)
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_name                  (name) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
@@ -33,6 +35,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable,
          :omniauthable, omniauth_providers: [:facebook, :twitter]
+
+  include TokenAuthenticatable
 
   has_many :identities, dependent: :delete_all
   has_many :votes
