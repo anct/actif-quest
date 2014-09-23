@@ -1,22 +1,22 @@
 <p id="notice"><%= notice %></p>
 
 <p class="lead">
-  <span>Name:</span>
+  <span class="pink">Name:</span class="pink">
   <%= @achievement.name %>
 </p>
 
 <p class="lead">
-  <span>Condition:</span>
+  <span class="pink">Condition:</span class="pink">
   <%= @achievement.condition %>
 </p>
 
 <p class="lead">
-  <span>Description:</span>
+  <span class="pink">Description:</span class="pink">
   <%= @achievement.description %>
 </p>
 
 <p class="lead">
-  <span>Icon:</span>
+  <span class="pink">Icon:</span class="pink">
     <%= image_tag(@achievement.icon_url) if @achievement.icon_url.present? %>
 </p>
 

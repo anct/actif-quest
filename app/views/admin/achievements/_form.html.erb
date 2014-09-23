@@ -1,35 +1,51 @@
 <%= form_for([:admin, @achievement]) do |f| %>
-  <% if @achievement.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@achievement.errors.count, "error") %> prohibited this admin_achievement from being saved:</h2>
+<% if @achievement.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@achievement.errors.count, "error") %> prohibited this admin_achievement from being saved:</h2>
 
-      <ul>
-      <% @achievement.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% @achievement.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-  <div class="field">
-    <span><%= f.label :name %></span><br>
-    <%= f.text_field :name %>
+<div class="form-group">
+  <%= f.label :name, class: "col-sm-3 control-label" %>
+  <div class="col-sm-9">
+    <%= f.text_field :name, autofocus: true, placeholder: "Name", class: "form-control" %>
+    <br>
   </div>
-  <div class="field">
-    <span><%= f.label :condition %></span><br>
-    <%= f.text_field :condition %>
+</div>
+
+<div class="form-group">
+  <%= f.label :condition, class: "col-sm-3 control-label" %>
+  <div class="col-sm-9">
+    <%= f.text_field :condition, placeholder: "Condition", class: "form-control" %>
+    <br>
   </div>
-  <div class="field">
-    <span><%= f.label :description %></span><br>
-    <%= f.text_field :description %>
+</div>
+
+<div class="form-group">
+  <%= f.label :description, class: "col-sm-3 control-label" %>
+  <div class="col-sm-9">
+    <%= f.text_field :description, placeholder: "Description", class: "form-control" %>
+    <br>
   </div>
-  <div class="field">
-    <span><%= f.label :icon_url %></span><br>
+</div>
+
+<div class="form-group">
+   <%= f.label :icon_url, class: "col-sm-3 control-label" %>
+  <div class="col-sm-9">
     <%= f.file_field :icon_url %>
+    <br>
   </div>
-  <br>
-  <div class="actions">
-    <%= f.submit :class => "btn btn-primary" %>
-  </div>
-  <br>
+</div>
+
+<br>
+<div class="actions">
+  <%= f.submit :class => "btn btn-primary" %>
+</div>
+<br>
 <% end %>
