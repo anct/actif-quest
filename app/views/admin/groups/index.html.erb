@@ -9,7 +9,7 @@
         <td><%= group.name %></td>
         <td>
           <%= admin_action_btn 'Edit', edit_admin_group_path(group) %>
-          <%= admin_action_btn 'Destroy', admin_group_path(group), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= admin_destroy_btn admin_group_path(group), method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>

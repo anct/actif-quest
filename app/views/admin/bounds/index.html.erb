@@ -11,7 +11,7 @@
         <td>
           <%= admin_action_btn 'Edit', edit_admin_bound_path(bound) %>
           <%= admin_action_btn 'New Beacon', new_admin_bound_beacon_path(bound) %>
-          <%= admin_action_btn 'Destroy', admin_bound_path(bound), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= admin_destroy_btn admin_bound_path(bound), method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>

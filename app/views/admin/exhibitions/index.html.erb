@@ -10,7 +10,7 @@
         <td><%= exhibition.group_id %></td>
         <td>
           <%= admin_action_btn 'Edit', edit_admin_exhibition_path(exhibition) %>
-          <%= admin_action_btn 'Destroy', admin_exhibition_path(exhibition), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= admin_destroy_btn admin_exhibition_path(exhibition), method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>

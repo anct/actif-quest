@@ -10,4 +10,8 @@ module ApplicationHelper
   def admin_action_btn_sm(name, path, option = {})
     link_to(name, path, option.merge(class: "btn btn-primary btn-sm"))
   end
+
+  def admin_destroy_btn(path, option = {})
+    link_to('Destroy', path, option.merge(class: "btn btn-danger"))
+  end
 end
