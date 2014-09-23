@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     resources :achievements, only: [:index]
+    resources :beacons, only: [:index]
     resources :bounds, only: [:index]
     resources :exhibitions, only: [:index, :show]
     resources :notifications, only: [:index]
