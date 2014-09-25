@@ -20,5 +20,5 @@
     <%= image_tag(@achievement.icon_url) if @achievement.icon_url.present? %>
 </p>
 
-<%= link_to 'Edit', edit_admin_achievement_path(@achievement) %> |
-<%= link_to 'Back', admin_achievements_path %>
+<%= admin_edit_btn edit_admin_achievement_path(@achievement) %>
+<%= admin_back_btn admin_achievements_path %>
