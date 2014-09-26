@@ -11,6 +11,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  secret     :string(255)
+#  deleted_at :datetime
 #
 # Indexes
 #
