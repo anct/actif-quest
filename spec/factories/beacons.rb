@@ -18,12 +18,12 @@
 
 FactoryGirl.define do
   factory :beacon do
-    uuid "MyString"
-    minor 1
-    major 1
-    latitude 1.5
-    longitude 1.5
-    floor 1
-    bound_id 1
+    uuid "379502e7-f178-4ba5-92e1-4d20f6c513df"
+    minor { Faker::Number.number(5) }
+    major { Faker::Number.number(5) }
+    latitude { Faker::Address.latitude }
+    longitude { Faker::Address.longitude }
+    floor { Faker::Number.digit }
+    bound
   end
 end

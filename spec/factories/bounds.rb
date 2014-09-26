@@ -12,6 +12,6 @@
 
 FactoryGirl.define do
   factory :bound do
-    name "MyString"
+    name { Faker::Name.title }
   end
 end
