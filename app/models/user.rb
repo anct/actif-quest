@@ -42,11 +42,11 @@ class User < ActiveRecord::Base
 
   has_many :identities, dependent: :delete_all
   has_many :votes
-  has_many :voted_exhibitions, class_name: Exhibition.name, through: :votes
+  has_many :voted_exhibitions, through: :votes, source: :votable, source_type: Exhibition.name
   has_many :favorites
-  has_many :favorite_statuses, class_name: Status.name, through: :favorites
+  has_many :favorite_statuses, through: :favorites, source: :favorable, source_type: Status.name
   has_many :statuses, dependent: :destroy
-  
+
   validates_presence_of :name, :screen_name
   validates_uniqueness_of :name
   validates_format_of :name, with: /\A(\w)+\Z/

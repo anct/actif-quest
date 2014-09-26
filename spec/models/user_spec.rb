@@ -44,9 +44,20 @@ RSpec.describe User, :type => :model do
   describe 'associations' do
     it { is_expected.to have_many(:identities) }
     it { is_expected.to have_many(:votes) }
-    it { is_expected.to have_many(:voted_exhibitions).class_name(Exhibition.name) }
+    it { is_expected.to have_many(:voted_exhibitions) }
     it { is_expected.to have_many(:favorites) }
-    it { is_expected.to have_many(:favorite_statuses).class_name(Status.name) }
+    it { is_expected.to have_many(:favorite_statuses) }
+    # NOTE: 外部キー周りがおかしいのにshoulda-matchersで拾えなかったので追加
+    it do
+      exhibition = FactoryGirl.create(:exhibition)
+      user.votes.create(votable: exhibition)
+      expect(user.voted_exhibitions.count).to eq 1
+    end
+    it do
+      status = FactoryGirl.create(:status)
+      user.favorites.create(favorable: status)
+      expect(user.favorite_statuses.count).to eq 1
+    end
   end
 
   describe 'validations' do
