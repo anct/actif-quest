@@ -6,40 +6,47 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+require 'faker'
+require 'factory_girl'
+Dir[Rails.root.join('spec/factories/*.rb')].each {|f| require f }
+
 Admin.all.delete_all(nil, hard: true)
 User.delete_all(nil, hard: true)
 Status.delete_all(nil, hard: true)
 Group.delete_all(nil, hard: true)
 Exhibition.delete_all(nil, hard: true)
 
+puts 'Creating admin...'
 Admin.create!(
   email: 'test@example.com',
   password: 'password',
   password_confirmation: 'password'
 )
 
-users = (0...30).map do |i|
-		User.create!(
- 		 	name: "test_user#{i}",
-  		screen_name: "テストユーザ#{i}"
-		)
-	end
+puts 'Creating users...'
+users = FactoryGirl.create_list(:user, 30)
 
+puts 'Creating identities...'
 users.each do |user|
-	30.times do |i|
-		user.statuses.create!(body: "This is a test status#{i}.")
-	end
+  user.identities << FactoryGirl.create(:identity)
 end
 
+puts 'Creating statuses...'
+users.each do |user|
+  30.times { |i| user.statuses.create!(body: Faker::Lorem.paragraph) }
+end
+
+puts 'Creating groups...'
 groups = (0...30).map do |i|
-		Group.create!(name: "test_group#{i}")
-end
+    Group.create!(name: "test_group#{i}")
+  end
 
+puts 'Creating exhibitions...'
 groups.each do |group|
-	2.times do |i|
-		group.exhibitions.create!(
-			name: "test_exhibition#{i}",
-			introduction: "This is a test exhibition#{i}."
-		)
-	end
+  2.times do |i|
+    group.exhibitions.create!(
+      name: "test_exhibition#{i}",
+      introduction: "This is a test exhibition#{i}."
+    )
+  end
 end

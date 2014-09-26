@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  # TODO: あとで消す必要があるかも
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   devise_for :admins, only: [:sign_in, :sign_out, :session], controllers: {
       sessions: "admins/sessions",
       registrations: "admins/registrations"

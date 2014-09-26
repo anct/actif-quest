@@ -23,11 +23,14 @@ group :default do
   gem 'font-awesome-rails'
   gem 'kaminari'
 
-  gem 'kakurenbo'
   gem 'devise'
-  gem 'annotate', :git => 'https://github.com/ctran/annotate_models'
+  gem 'omniauth'
+  gem 'omniauth-facebook'
+  gem 'omniauth-twitter'
+  gem 'dotenv-rails'
 
   gem 'active_model_serializers'
+  gem 'kakurenbo'
 end
 
 group :test, :development do
@@ -54,6 +57,8 @@ group :development do
 
   gem 'rails_best_practices'
   gem 'bullet'
+
+  gem 'annotate', :git => 'https://github.com/ctran/annotate_models'
 end
 
 group :test do
