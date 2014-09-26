@@ -59,6 +59,31 @@ RSpec.describe User, :type => :model do
     it { is_expected.to validate_presence_of(:screen_name) }
   end
 
+  describe 'callbacks' do
+    context 'user has a identity' do
+      before do
+        user.identities << FactoryGirl.create(:identity)
+        user.destroy
+      end
+      it { expect(Identity.only_deleted.count).to eq 1 }
+      it 'identity is restored' do
+        expect { user.restore }.to change(Identity, :count).by(1)
+      end
+    end
+
+    context 'user has 2 identities' do
+      before do
+        user.identities << FactoryGirl.create(:identity, provider: 'facebook')
+        user.identities << FactoryGirl.create(:identity, provider: 'twitter')
+        user.destroy
+      end
+      it { expect(Identity.only_deleted.count).to eq 2 }
+      it 'identities are restored' do
+        expect { user.restore }.to change(Identity, :count).by(2)
+      end
+    end
+  end
+
   describe '#vote' do
     create_temp_table(:votable_objects) { |t| true }
     VotableObject = Class.new(ActiveRecord::Base) { include Votable }
