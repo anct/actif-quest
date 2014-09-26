@@ -44,7 +44,9 @@ RSpec.describe User, :type => :model do
   describe 'associations' do
     it { is_expected.to have_many(:identities) }
     it { is_expected.to have_many(:votes) }
-    it { is_expected.to have_many(:voted_exhibitions) }
+    it { is_expected.to have_many(:voted_exhibitions).class_name(Exhibition.name) }
+    it { is_expected.to have_many(:favorites) }
+    it { is_expected.to have_many(:favorite_statuses).class_name(Status.name) }
   end
 
   describe 'validations' do
