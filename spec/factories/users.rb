@@ -35,14 +35,12 @@
 
 FactoryGirl.define do
   factory :user do
-    name {
-      Faker::Config.locale = :en
-      Faker::Internet.user_name(5..16).gsub(/\./, '')
-    }
-    screen_name {
-      Faker::Config.locale = :ja
-      Faker::Name.name
-    }
+    sequence(:name) { |n| "test_user#{n}" }
+    sequence(:screen_name) { |n| "てすとゆーざ#{n}" }
+    sequence(:email) { |n| "test#{n}@example.com" }
+    password 'password'
+    password_confirmation 'password'
+    authentication_token 'test_token'
     image_url {
       Faker::Config.locale = :en
       Faker::Internet.url
