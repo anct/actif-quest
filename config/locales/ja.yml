@@ -1,4 +1,14 @@
 ja:
+  activerecord:
+    errors:
+      models:
+        admin:
+          attributes:
+            password_confirmation:
+              confirmation: が間違っています。
+            current_password:
+              invalid: が間違っています。
+              blank: が空白です。
   views: 
     pagination: 
       truncate: "..."
