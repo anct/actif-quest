@@ -5,5 +5,5 @@
   <%= @notification.content %>
 </p>
 
-<%= link_to 'Edit', edit_admin_notification_path(@notification) %> |
-<%= link_to 'Back', admin_notifications_path %>
+<%= admin_edit_btn edit_admin_notification_path(@notification) %>
+<%= admin_back_btn admin_notifications_path %>

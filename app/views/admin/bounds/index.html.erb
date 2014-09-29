@@ -9,9 +9,9 @@
         <td><%= bound.name %></td>
         <td><%= pluralize(bound.beacons.count, "Beacon") %></td>
         <td>
-          <%= admin_action_btn 'Edit', edit_admin_bound_path(bound) %>
-          <%= admin_action_btn 'New Beacon', new_admin_bound_beacon_path(bound) %>
-          <%= admin_action_btn 'Destroy', admin_bound_path(bound), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= admin_edit_btn edit_admin_bound_path(bound) %>
+          <%= admin_new_btn new_admin_bound_beacon_path(bound) %>
+          <%= admin_destroy_btn admin_bound_path(bound) %>
         </td>
       </tr>
     <% end %>

@@ -8,8 +8,8 @@
       <tr class="pointer-cursor" data-href="<%= admin_notification_path(notification) %>">
         <td><%= notification.content[0...16] %>...</td>
         <td>
-          <%= admin_action_btn 'Edit', edit_admin_notification_path(notification) %>
-          <%= admin_action_btn 'Destroy', admin_notification_path(notification), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= admin_edit_btn edit_admin_notification_path(notification) %>
+          <%= admin_destroy_btn admin_notification_path(notification) %>
         </td>
       </tr>
     <% end %>

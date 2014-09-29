@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', admin_group_path(@group) %> |
-<%= link_to 'Back', admin_groups_path %>
+<%= admin_show_btn admin_group_path(@group) %>
+<%= admin_edit_btn admin_groups_path %>

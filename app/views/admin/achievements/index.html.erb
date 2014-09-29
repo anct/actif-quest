@@ -8,8 +8,8 @@
       <tr class="pointer-cursor" data-href="<%= admin_achievement_path(achievement) %>">
         <td><%= achievement.name %></td>
         <td>
-          <%= link_to 'Edit', edit_admin_achievement_path(achievement), class: "btn btn-primary" %>
-          <%= link_to 'Destroy', admin_achievement_path(achievement), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+          <%= admin_edit_btn edit_admin_achievement_path(achievement) %>
+          <%= admin_destroy_btn admin_achievement_path(achievement) %>
         </td>
       </tr>
     <% end %>

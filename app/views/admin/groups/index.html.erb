@@ -1,4 +1,4 @@
-<h1 class="first">グループ(部活)一覧 <small>- Groups</small></h1>
+<h1 class="first">グループ一覧 <small>- Groups</small></h1>
 <br>
 
 <table class="table table-hover table-row-clickable">
@@ -8,8 +8,8 @@
       <tr class="pointer-cursor" data-href="<%= admin_group_path(group) %>">
         <td><%= group.name %></td>
         <td>
-          <%= admin_action_btn 'Edit', edit_admin_group_path(group) %>
-          <%= admin_action_btn 'Destroy', admin_group_path(group), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= admin_edit_btn edit_admin_group_path(group) %>
+          <%= admin_destroy_btn admin_group_path(group) %>
         </td>
       </tr>
     <% end %>

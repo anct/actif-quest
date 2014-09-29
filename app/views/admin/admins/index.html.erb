@@ -12,7 +12,7 @@
         <td><%= admin.last_sign_in_at.to_s(:db) %></td>
         <td><%= admin.created_at.to_s(:db) %></td>
         <td>
-          <%= admin_action_btn 'Destroy', admin_admin_path(admin), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= admin_destroy_btn admin_admin_path(admin) %>
         </td>
       </tr>
     <% end %>
