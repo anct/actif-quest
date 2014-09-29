@@ -27,8 +27,10 @@ module ApplicationHelper
     link_to(fa_icon("check", text: 'New Beacon'), path, option.merge(class: "btn btn-warning"))
   end
 
-  # TODO: admin_update_btnつくる
-
+  def admin_update_btn
+    content_tag(:button, fa_icon("refresh", text: 'Update'), class: "btn btn-primary")
+  end
+     
   def admin_show_btn(path, option = {})
     link_to(fa_icon("list-ul", text: 'Show'), path, option.merge(class: "btn btn-primary"))
   end
