@@ -34,20 +34,20 @@
           <%= link_to "Logout", destroy_admin_session_path, method: :delete, :class => 'navbar-link' %>
         <% end %>
         <% if notice %>
-          <p class="alert alert-notice"><%= notice %></p>
+          <div class="alert alert-success" role="alert"><%= notice %></div>
         <% end %>
         <% if alert %>
-          <p class="alert alert-error"><%= alert %></p>
+          <div class="alert alert-danger" role="alert"><%= alert %></div>
         <% end %>
         <%= yield %>
       </div>
     </div>
     <% else %>
       <% if notice %>
-        <p class="alert alert-notice"><%= notice %></p>
+        <div class="alert alert-success" role="alert"><%= notice %></div>
       <% end %>
       <% if alert %>
-        <p class="alert alert-error"><%= alert %></p>
+        <div class="alert alert-danger" role="alert"><%= alert %></div>
       <% end %>
       <%= yield %>
     <% end %>
