@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140926133655) do
+ActiveRecord::Schema.define(version: 20140930133814) do
 
   create_table "achievements", force: true do |t|
     t.string   "name"
@@ -100,6 +100,14 @@ ActiveRecord::Schema.define(version: 20140926133655) do
 
   create_table "notifications", force: true do |t|
     t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "spam_reports", force: true do |t|
+    t.integer  "reporter_id"
+    t.integer  "spam_id"
+    t.string   "spam_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
