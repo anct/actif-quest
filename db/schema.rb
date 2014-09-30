@@ -120,6 +120,15 @@ ActiveRecord::Schema.define(version: 20140930133814) do
     t.datetime "deleted_at"
   end
 
+  create_table "treasures", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "image_url"
+    t.integer  "bound_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "screen_name"

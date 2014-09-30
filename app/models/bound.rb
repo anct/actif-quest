@@ -11,6 +11,7 @@
 class Bound < ActiveRecord::Base
 
   has_many :beacons
+  has_many :treasures
 
   validates_presence_of :name
 end
