@@ -12,4 +12,7 @@
 #
 
 class Treasure < ActiveRecord::Base
+  
+  belongs_to :bound
+  
 end
