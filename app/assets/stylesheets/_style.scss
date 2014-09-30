@@ -23,16 +23,6 @@ span.pink {
   color: darken($brand-primary, 10%);
 }
 
-.alert {
-  h2 {
-    font-size: $font-size-large;
-    margin-top: 0;
-  }
-  ul {
-    margin-bottom: 0;
-  }
-}
-
 .form-horizontal {
   .input-group[class*="col-"] {
     padding-right: 15px;
@@ -91,4 +81,16 @@ span.pink {
 }
 .timestamp {
   color: $gray-light;
+}
+
+/* error_messages */ 
+
+div.alert {
+  margin-top: 20px;
+}
+
+div#error_explanation {
+  h2{
+    font-size: $font-size-base;
+  }
 }
