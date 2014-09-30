@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
 
   include TokenAuthenticatable
 
+  has_many :check_ins
   has_many :identities, dependent: :delete_all
   has_many :votes
   has_many :voted_exhibitions, through: :votes, source: :votable, source_type: Exhibition.name

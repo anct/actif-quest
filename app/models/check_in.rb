@@ -12,5 +12,6 @@
 class CheckIn < ActiveRecord::Base
 
   belongs_to :bound
-  
+  belongs_to :user
+
 end
