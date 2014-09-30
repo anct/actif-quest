@@ -6,6 +6,8 @@ ja:
           attributes:
             password_confirmation:
               confirmation: が間違っています。
+            password:
+              too_short: が短すぎます。（8〜16字）
             current_password:
               invalid: が間違っています。
               blank: が空白です。
