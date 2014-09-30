@@ -15,6 +15,7 @@ class Exhibition < ActiveRecord::Base
 
   include Votable
 
+  belongs_to :bound
   belongs_to :group
 
   validates :name, presence: true
