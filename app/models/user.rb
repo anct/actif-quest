@@ -80,6 +80,11 @@ class User < ActiveRecord::Base
     self.votes.find_by(votable: votable).try(:destroy)
   end
 
+  def check_in(bound)
+    raise ArgumentError unless bound.is_a? Bound
+    self.check_ins.create bound: bound
+  end
+
   def has_provider?(provider)
     self.identities.any? { |i| i.provider == provider.to_s }
   end
