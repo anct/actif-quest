@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
 
   include TokenAuthenticatable
 
+  has_many :check_ins
   has_many :identities, dependent: :delete_all
   has_many :votes
   has_many :voted_exhibitions, through: :votes, source: :votable, source_type: Exhibition.name
@@ -77,6 +78,11 @@ class User < ActiveRecord::Base
   def unvote(votable)
     raise ArgumentError unless votable.respond_to? :votes
     self.votes.find_by(votable: votable).try(:destroy)
+  end
+
+  def check_in(bound)
+    raise ArgumentError unless bound.is_a? Bound
+    self.check_ins.create bound: bound
   end
 
   def has_provider?(provider)

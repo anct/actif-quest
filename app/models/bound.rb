@@ -11,6 +11,7 @@
 class Bound < ActiveRecord::Base
 
   has_many :beacons
+  has_many :check_ins
   has_many :exhibitions
   has_many :treasures
 
