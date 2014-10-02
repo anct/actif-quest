@@ -14,5 +14,8 @@
 class Treasure < ActiveRecord::Base
   
   belongs_to :bound
+
+  has_many :taken_treasures
+  has_many :users, through: :taken_treasures
   
 end
