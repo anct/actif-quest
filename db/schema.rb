@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140930140432) do
+ActiveRecord::Schema.define(version: 20141002072803) do
 
   create_table "achievements", force: true do |t|
     t.string   "name"
@@ -125,6 +125,13 @@ ActiveRecord::Schema.define(version: 20140930140432) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
+  end
+
+  create_table "taken_treasures", force: true do |t|
+    t.string   "user_id"
+    t.integer  "treasure_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "treasures", force: true do |t|

@@ -1,0 +1,21 @@
+<h1 class="first">宝物一覧 <small>- Treasures</small></h1>
+<br>
+
+<table class="table table-hover table-row-clickable">
+
+  <tbody>
+    <% @treasures.each do |treasure| %>
+      <tr class="pointer-cursor" data-href="<%= admin_treasure_path(treasure) %>">
+        <td><%= treasure.name %></td>
+        <td>
+          <%= admin_edit_btn edit_admin_treasure_path(treasure) %>
+          <%= admin_destroy_btn admin_treasure_path(treasure) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Treasure', new_admin_treasure_path %>

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :exhibitions
     resources :groups
     resources :notifications
+    resources :treasures
     resources :users, :except => [:new, :edit, :create, :update]
     get '/' => 'home#dashboard'
   end
