@@ -47,6 +47,7 @@ class User < ActiveRecord::Base
   has_many :favorites
   has_many :favorite_statuses, through: :favorites, source: :favorable, source_type: Status.name
   has_many :statuses, dependent: :destroy
+  has_many :taken_treasures
 
   validates_presence_of :name, :screen_name
   validates_uniqueness_of :name
