@@ -55,6 +55,6 @@ class Admin::TreasuresController < Admin::BaseController
     end
 
     def admin_treasure_params
-      params.require(:treasure).permit(:content)
+      params.require(:treasure).permit(:name, :description, :image_url)
     end
 end
