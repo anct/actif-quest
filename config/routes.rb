@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     resources :exhibitions, only: [:index, :show]
     resources :notifications, only: [:index]
     resources :statuses, only: [:index]
+    resources :treasures, only: [:index, :show]
     resources :users, only: [:show]
   end
 
