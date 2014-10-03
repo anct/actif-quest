@@ -17,5 +17,9 @@ class Treasure < ActiveRecord::Base
 
   has_many :taken_treasures
   has_many :users, through: :taken_treasures
-  
+
+  def take(treasure)
+    raise ArgumentError unless treasure.is_a? treasure
+    self.treasures.create treasure: treasure
+  end
 end
