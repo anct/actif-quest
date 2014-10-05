@@ -1,6 +1,6 @@
 class Api::BaseController < ApplicationController
   before_action :authenticate_user_from_token!
-  # before_filter :authenticate_user!
+  before_filter :authenticate_user!
 
   def default_serializer_options
     { root: false }
