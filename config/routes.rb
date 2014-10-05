@@ -37,7 +37,7 @@ Rails.application.routes.draw do
       end
     end
     resources :notifications, only: [:index]
-    resources :statuses, only: [:index]
+    resources :statuses, only: [:index, :create]
     resources :treasures, only: [:index, :show]
     resources :users, only: [:show]
   end
