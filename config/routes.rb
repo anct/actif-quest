@@ -31,7 +31,11 @@ Rails.application.routes.draw do
     resources :achievements, only: [:index]
     resources :beacons, only: [:index]
     resources :bounds, only: [:index]
-    resources :exhibitions, only: [:index, :show]
+    resources :exhibitions, only: [:index, :show] do
+      member do
+        post 'vote'
+      end
+    end
     resources :notifications, only: [:index]
     resources :statuses, only: [:index]
     resources :treasures, only: [:index, :show]
