@@ -12,7 +12,7 @@ class Api::ExhibitionsController < Api::BaseController
 
   def vote
     @vote = current_user.vote(@exhibition)
-    render json: @vote 
+    render json: @vote, status: :created
   end
 
   private
