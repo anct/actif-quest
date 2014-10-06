@@ -1,5 +1,5 @@
 class Api::StatusesController < Api::BaseController
-  before_action :set_status, only: [:destroy, :favorite]
+  before_action :set_status, only: [:destroy, :favorite, :unfav]
 
   def index
     @statuses = Status.includes(:user).page(params[:page]).per(100)
@@ -19,6 +19,11 @@ class Api::StatusesController < Api::BaseController
   def favorite
     @favorite = current_user.fav(@status)
     render json: @status, status: :created
+  end
+
+  def unfav
+    @unfav = current_user.unfav(@status)
+    render json: @status, status: :no_content
   end
 
   private

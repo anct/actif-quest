@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     resources :statuses, only: [:index, :create, :destroy] do
       member do
         post 'favorite'
+        delete 'unfav'
       end
     end
     resources :treasures, only: [:index, :show] do
