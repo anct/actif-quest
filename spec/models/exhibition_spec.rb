@@ -9,6 +9,7 @@
 #  group_id     :integer
 #  created_at   :datetime
 #  updated_at   :datetime
+#  bound_id     :integer
 #
 
 require 'rails_helper'
@@ -22,6 +23,7 @@ RSpec.describe Exhibition, :type => :model do
     it_behaves_like 'votable' do
       let(:votable) { exhibition }
     end
+    it { is_expected.to belong_to(:bound) }
   end
 
   describe 'validations' do

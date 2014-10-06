@@ -13,6 +13,14 @@
 
 require 'rails_helper'
 
-RSpec.describe Achievement, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe Achievement, type: :model do
+
+  let(:achievement) { FactoryGirl.create(:achievement) }
+  subject { achievement }
+
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:condition) }
+    it { is_expected.to validate_presence_of(:description) }
+  end
 end

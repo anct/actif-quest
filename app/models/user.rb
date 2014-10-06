@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable,
          :omniauthable, omniauth_providers: [:facebook, :twitter]
 
+  include SpamReportable
   include TokenAuthenticatable
 
   has_many :check_ins
@@ -49,6 +50,9 @@ class User < ActiveRecord::Base
   has_many :statuses, dependent: :destroy
   has_many :taken_treasures
   has_many :treasures, through: :taken_treasures
+  has_many :spam_reports, foreign_key: :reporter_id
+  has_many :spam_users, through: :spam_reports, source: :spam, source_type: User.name
+  has_many :spam_statuses, through: :spam_reports, source: :spam, source_type: Status.name
 
   validates_presence_of :name, :screen_name
   validates_uniqueness_of :name
@@ -59,7 +63,7 @@ class User < ActiveRecord::Base
 
   def fav(favorable)
     raise ArgumentError unless favorable.respond_to? :favorites
-    self.favorites.create(favorable: favorable)
+    self.favorites.find_or_create_by(favorable: favorable)
   end
 
   def unfav(favorable)
@@ -74,7 +78,7 @@ class User < ActiveRecord::Base
 
   def vote(votable)
     raise ArgumentError unless votable.respond_to? :votes
-    self.votes.create votable: votable
+    self.votes.find_or_create_by(votable: votable)
   end
 
   def unvote(votable)
@@ -84,7 +88,12 @@ class User < ActiveRecord::Base
 
   def check_in(bound)
     raise ArgumentError unless bound.is_a? Bound
-    self.check_ins.create bound: bound
+    self.check_ins.find_or_create_by(bound: bound)
+  end
+
+  def spam_report(spam)
+    raise ArgumentError unless spam.respond_to? :spam_reports
+    self.spam_reports.find_or_create_by(spam: spam)
   end
 
   def has_provider?(provider)

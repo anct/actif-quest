@@ -15,9 +15,8 @@
 
 FactoryGirl.define do
   factory :treasure do
-    name "MyString"
-    description "MyString"
-    image_url "MyString"
-    bound_id 1
+    sequence(:name) { |n| "おたから#{n}" }
+    sequence(:description) { |n| "こころがぴょんぴょんするおたから その#{n}" }
+    bound
   end
 end

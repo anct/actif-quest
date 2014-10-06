@@ -12,5 +12,17 @@
 require 'rails_helper'
 
 RSpec.describe CheckIn, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  subject { CheckIn.new }
+
+  describe 'associations' do
+    it { is_expected.to belong_to(:bound) }
+    it { is_expected.to belong_to(:user) }
+  end
+
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:bound_id) }
+    it { is_expected.to validate_presence_of(:user_id) }
+    it { is_expected.to validate_uniqueness_of(:user_id).scoped_to(:bound_id) }
+  end
 end

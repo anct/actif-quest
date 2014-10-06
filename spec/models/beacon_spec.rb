@@ -16,6 +16,22 @@
 
 require 'rails_helper'
 
-RSpec.describe Beacon, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe Beacon, type: :model do
+
+  let(:beacon) { FactoryGirl.create(:beacon) }
+  subject { beacon }
+
+  describe 'associations' do
+    it { is_expected.to belong_to(:bound) }
+  end
+
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:uuid) }
+    it { is_expected.to validate_presence_of(:minor) }
+    it { is_expected.to validate_presence_of(:major) }
+    it { is_expected.to validate_presence_of(:latitude) }
+    it { is_expected.to validate_presence_of(:longitude) }
+    it { is_expected.to validate_presence_of(:floor) }
+    it { is_expected.to validate_presence_of(:bound_id) }
+  end
 end
