@@ -12,8 +12,9 @@
 #
 
 class Achievement < ActiveRecord::Base
-	mount_uploader :icon_url, AchievementUploader
-  # validates :name, presence: true
-  # validates :condition, presence: true
-  # validates :description, presence: true
+  validates :name, presence: true
+  validates :condition, presence: true
+  validates :description, presence: true
+
+  mount_uploader :icon_url, AchievementUploader
 end
