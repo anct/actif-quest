@@ -32,6 +32,6 @@ class Api::StatusesController < Api::BaseController
     end
 
     def status_params
-        params.require(:status).permit(:user, :body)
+      params.require(:status).permit(:user, :body)
     end
 end
