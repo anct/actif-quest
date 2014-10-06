@@ -247,7 +247,29 @@ RSpec.describe User, type: :model do
     end
 
     context 'w/ invalid argument' do
-      it { expect { user.take(treasure) }.to raise_error(ArgumentError) }
+      it { expect { user.take(Object.new) }.to raise_error(ArgumentError) }
+    end
+  end
+
+  describe '#spam_report' do
+    create_temp_table(:spam_objects) { |t| true }
+    SpamObject = Class.new(ActiveRecord::Base) { include SpamReportable }
+
+    context 'w/ valid argument' do
+      let(:spam) { SpamObject.create }
+      context 'not yet reported' do
+        it { expect { user.spam_report(spam) }.to change(SpamReport, :count).by(1) }
+      end
+
+      context 'already reported' do
+        before { user.spam_reports.create(spam: spam) }
+        it { expect { user.spam_report(spam) }.to change(SpamReport, :count).by(0) }
+        it { expect(user.spam_report(spam)).to be_persisted }
+      end
+    end
+
+    context 'w/ invalid argument' do
+      it { expect { user.spam_report(Object.new) }.to raise_error(ArgumentError) }
     end
   end
 

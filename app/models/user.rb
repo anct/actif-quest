@@ -91,6 +91,11 @@ class User < ActiveRecord::Base
     self.check_ins.find_or_create_by(bound: bound)
   end
 
+  def spam_report(spam)
+    raise ArgumentError unless spam.respond_to? :spam_reports
+    self.spam_reports.find_or_create_by(spam: spam)
+  end
+
   def has_provider?(provider)
     self.identities.any? { |i| i.provider == provider.to_s }
   end
