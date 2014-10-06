@@ -13,6 +13,19 @@
 
 require 'rails_helper'
 
-RSpec.describe Treasure, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe Treasure, type: :model do
+
+  let(:treasure) { FactoryGirl.create(:treasure) }
+  subject { treasure }
+
+  describe 'associations' do
+    it { is_expected.to belong_to(:bound) }
+    it { is_expected.to have_many(:taken_treasures) }
+    it { is_expected.to have_many(:users) }
+  end
+
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:description) }
+  end
 end
