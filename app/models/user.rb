@@ -98,7 +98,7 @@ class User < ActiveRecord::Base
 
   def take(treasure)
     raise ArgumentError unless treasure.is_a? Treasure
-    self.treasures.create treasure: treasure
+    self.taken_treasures.create treasure: treasure
   end
   
   def has_provider?(provider)
