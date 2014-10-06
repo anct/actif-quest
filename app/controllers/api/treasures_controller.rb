@@ -1,5 +1,5 @@
 class Api::TreasuresController < Api::BaseController
-  before_action :set_treasure, only: [:take]
+  before_action :set_treasure, only: [:take, :show]
 
   def index
     @treasures = Treasure.all
@@ -7,7 +7,6 @@ class Api::TreasuresController < Api::BaseController
   end
 
   def show
-    @treasure = Treasure.find(params[:id])
     render json: @user
   end
 
