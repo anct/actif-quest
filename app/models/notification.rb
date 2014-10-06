@@ -9,5 +9,7 @@
 #
 
 class Notification < ActiveRecord::Base
+  # TODO: 投稿者（admin）アカウントとの紐付けは不要？
+  # TODO: 本文の長さに関するvalidationの検討
   validates :content, presence: true
 end
