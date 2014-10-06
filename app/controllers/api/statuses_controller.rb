@@ -1,4 +1,5 @@
 class Api::StatusesController < Api::BaseController
+  before_action :set_status, only: [:favorite]
 
   def index
     @statuses = Status.includes(:user).page(params[:page]).per(100)
@@ -10,7 +11,16 @@ class Api::StatusesController < Api::BaseController
     render json: @status, status: :created
   end
 
+  def favorite
+    @favorite = current_user.fav(@status)
+    render json: @status, status: :created
+  end
+
   private
+    def set_status
+      @status = Status.find(params[:id])
+    end
+
     def status_params
         params.require(:status).permit(:user, :body)
     end

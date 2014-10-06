@@ -37,7 +37,11 @@ Rails.application.routes.draw do
       end
     end
     resources :notifications, only: [:index]
-    resources :statuses, only: [:index, :create]
+    resources :statuses, only: [:index, :create] do
+      member do
+        post 'favorite'
+      end
+    end
     resources :treasures, only: [:index, :show]
     resources :users, only: [:show]
   end
