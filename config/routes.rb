@@ -42,7 +42,11 @@ Rails.application.routes.draw do
         post 'favorite'
       end
     end
-    resources :treasures, only: [:index, :show]
+    resources :treasures, only: [:index, :show] do
+      member do
+        post 'take'
+      end
+    end
     resources :users, only: [:show]
   end
 
