@@ -96,6 +96,11 @@ class User < ActiveRecord::Base
     self.spam_reports.find_or_create_by(spam: spam)
   end
 
+  def take(treasure)
+    raise ArgumentError unless treasure.is_a? Treasure
+    self.treasures.create treasure: treasure
+  end
+  
   def has_provider?(provider)
     self.identities.any? { |i| i.provider == provider.to_s }
   end
