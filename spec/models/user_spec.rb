@@ -33,7 +33,8 @@
 
 require 'rails_helper'
 
-RSpec.describe User, :type => :model do
+RSpec.describe User, type: :model do
+
   let(:user) { FactoryGirl.create(:user) }
   subject { user }
 
@@ -47,6 +48,8 @@ RSpec.describe User, :type => :model do
     it { is_expected.to have_many(:voted_exhibitions) }
     it { is_expected.to have_many(:favorites) }
     it { is_expected.to have_many(:favorite_statuses) }
+    it { is_expected.to have_many(:taken_treasures) }
+    it { is_expected.to have_many(:treasures) }
     # NOTE: 外部キー周りがおかしいのにshoulda-matchersで拾えなかったので追加
     it do
       exhibition = FactoryGirl.create(:exhibition)
@@ -190,6 +193,44 @@ RSpec.describe User, :type => :model do
 
     context 'w/ unfavorable object as argument' do
       it { expect { user.unfav(Object.new) }.to raise_error(ArgumentError) }
+    end
+  end
+
+  describe '#check_in' do
+    context 'w/ valid argument' do
+      let(:bound) { FactoryGirl.create(:bound) }
+      context 'not yet checked-in' do
+        it { expect { user.check_in(bound) }.to change(CheckIn, :count).by(1) }
+      end
+
+      context 'already checked-in' do
+        before { user.check_ins.create!(bound: bound) }
+        it { expect { user.check_in(bound) }.to change(CheckIn, :count).by(0) }
+        it { expect(user.check_in(bound)).to be_persisted }
+      end
+    end
+
+    context 'w/ invalid argument' do
+      it { expect { user.check_in(Object.new) }.to raise_error(ArgumentError) }
+    end
+  end
+
+  describe '#take' do
+    context 'w/ valid argument' do
+      let(:treasure) { FactoryGirl.create(:treasure) }
+      context 'not yet taken' do
+        it { expect { user.take(treasure) }.to change(Treasure, :count).by(1) }
+      end
+
+      context 'already taken' do
+        before { user.taken_treasures.create(treasure: treasure) }
+        it { expect { user.take(treasure) }.to change(Treasure, :count).by(0) }
+        it { expect(user.take(treasure)).to be_persisted }
+      end
+    end
+
+    context 'w/ invalid argument' do
+      it { expect { user.take(treasure) }.to raise_error(ArgumentError) }
     end
   end
 

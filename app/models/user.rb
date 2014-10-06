@@ -84,7 +84,7 @@ class User < ActiveRecord::Base
 
   def check_in(bound)
     raise ArgumentError unless bound.is_a? Bound
-    self.check_ins.create bound: bound
+    self.check_ins.find_or_create_by(bound: bound)
   end
 
   def has_provider?(provider)
