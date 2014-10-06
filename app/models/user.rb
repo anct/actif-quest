@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
 
   def fav(favorable)
     raise ArgumentError unless favorable.respond_to? :favorites
-    self.favorites.create(favorable: favorable)
+    self.favorites.find_or_create_by(favorable: favorable)
   end
 
   def unfav(favorable)
@@ -74,7 +74,7 @@ class User < ActiveRecord::Base
 
   def vote(votable)
     raise ArgumentError unless votable.respond_to? :votes
-    self.votes.create votable: votable
+    self.votes.find_or_create_by(votable: votable)
   end
 
   def unvote(votable)
