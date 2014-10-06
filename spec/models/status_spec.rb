@@ -16,6 +16,14 @@ RSpec.describe Status, :type => :model do
   let(:status) { FactoryGirl.create(:status) }
   subject { status }
 
+  it_behaves_like 'favorable' do
+    let(:favorable) { status }
+  end
+
+  it_behaves_like 'spam reportable' do
+    let(:spam_reportable) { status }
+  end
+
   describe 'associations' do
     it { is_expected.to belong_to(:user) }
     it_behaves_like 'favorable' do

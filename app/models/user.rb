@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable,
          :omniauthable, omniauth_providers: [:facebook, :twitter]
 
+  include SpamReportable
   include TokenAuthenticatable
 
   has_many :check_ins
@@ -49,6 +50,9 @@ class User < ActiveRecord::Base
   has_many :statuses, dependent: :destroy
   has_many :taken_treasures
   has_many :treasures, through: :taken_treasures
+  has_many :spam_reports, foreign_key: :reporter_id
+  has_many :spam_users, through: :spam_reports, source: :spam, source_type: User.name
+  has_many :spam_statuses, through: :spam_reports, source: :spam, source_type: Status.name
 
   validates_presence_of :name, :screen_name
   validates_uniqueness_of :name

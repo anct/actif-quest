@@ -38,6 +38,10 @@ RSpec.describe User, type: :model do
   let(:user) { FactoryGirl.create(:user) }
   subject { user }
 
+  it_behaves_like 'spam reportable' do
+    let(:spam_reportable) { user }
+  end
+
   it_behaves_like 'token authenticatable' do
     let(:token_authenticatable) { user }
   end
@@ -50,6 +54,9 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:favorite_statuses) }
     it { is_expected.to have_many(:taken_treasures) }
     it { is_expected.to have_many(:treasures) }
+    it { is_expected.to have_many(:spam_reports) }
+    it { is_expected.to have_many(:spam_users) }
+    it { is_expected.to have_many(:spam_statuses) }
     # NOTE: 外部キー周りがおかしいのにshoulda-matchersで拾えなかったので追加
     it do
       exhibition = FactoryGirl.create(:exhibition)
@@ -60,6 +67,16 @@ RSpec.describe User, type: :model do
       status = FactoryGirl.create(:status)
       user.favorites.create(favorable: status)
       expect(user.favorite_statuses.count).to eq 1
+    end
+    it do
+      status = FactoryGirl.create(:status)
+      user.spam_reports.create(spam: status)
+      expect(user.spam_statuses.count).to eq 1
+    end
+    it do
+      user = FactoryGirl.create(:user)
+      user.spam_reports.create(spam: user)
+      expect(user.spam_users.count).to eq 1
     end
   end
 
