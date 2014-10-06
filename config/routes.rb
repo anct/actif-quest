@@ -41,7 +41,7 @@ Rails.application.routes.draw do
       end
     end
     resources :notifications, only: [:index]
-    resources :statuses, only: [:index, :create] do
+    resources :statuses, only: [:index, :create, :destroy] do
       member do
         post 'favorite'
       end
