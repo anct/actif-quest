@@ -9,7 +9,6 @@
 #  group_id     :integer
 #  created_at   :datetime
 #  updated_at   :datetime
-#  bound_id     :integer
 #
 
 require 'rails_helper'
