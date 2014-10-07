@@ -20,9 +20,4 @@ class Treasure < ActiveRecord::Base
 
   # TODO: 文字数制限等に関するvalidationの検討
   validates_presence_of :name, :description
-
-  def take(treasure)
-    raise ArgumentError unless treasure.is_a? Treasure
-    self.treasures.create treasure: treasure
-  end
 end

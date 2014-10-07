@@ -30,11 +30,28 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :achievements, only: [:index]
     resources :beacons, only: [:index]
-    resources :bounds, only: [:index]
-    resources :exhibitions, only: [:index, :show]
+    resources :bounds, only: [:index] do
+      member do
+        post 'check_in'
+      end
+    end
+    resources :exhibitions, only: [:index, :show] do
+      member do
+        post 'vote'
+      end
+    end
     resources :notifications, only: [:index]
-    resources :statuses, only: [:index]
-    resources :treasures, only: [:index, :show]
+    resources :statuses, only: [:index, :create, :destroy] do
+      member do
+        post 'favorites' => 'statuses#fav'
+        delete 'favorites' => 'statuses#unfav'
+      end
+    end
+    resources :treasures, only: [:index, :show] do
+      member do
+        post 'take'
+      end
+    end
     resources :users, only: [:show]
   end
 
