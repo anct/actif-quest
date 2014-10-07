@@ -43,8 +43,8 @@ Rails.application.routes.draw do
     resources :notifications, only: [:index]
     resources :statuses, only: [:index, :create, :destroy] do
       member do
-        post 'favorite'
-        delete 'unfav'
+        post 'favorites' => 'statuses#fav'
+        delete 'favorites' => 'statuses#unfav'
       end
     end
     resources :treasures, only: [:index, :show] do
