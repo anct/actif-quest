@@ -6,8 +6,8 @@
 #  uuid       :string(255)
 #  minor      :integer
 #  major      :integer
-#  latitude   :float
-#  longitude  :float
+#  latitude   :float(53)
+#  longitude  :float(53)
 #  floor      :integer
 #  bound_id   :integer
 #  created_at :datetime
