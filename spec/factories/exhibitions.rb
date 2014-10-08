@@ -9,7 +9,6 @@
 #  group_id     :integer
 #  created_at   :datetime
 #  updated_at   :datetime
-#  bound_id     :integer
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

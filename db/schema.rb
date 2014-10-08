@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141006142723) do
+ActiveRecord::Schema.define(version: 20141007232047) do
 
   create_table "achievements", force: true do |t|
     t.string   "name"
@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 20141006142723) do
     t.string   "uuid"
     t.integer  "minor"
     t.integer  "major"
-    t.float    "latitude"
-    t.float    "longitude"
+    t.float    "latitude",   limit: 53
+    t.float    "longitude",  limit: 53
     t.integer  "floor"
     t.integer  "bound_id"
     t.datetime "created_at"
