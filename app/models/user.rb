@@ -61,6 +61,12 @@ class User < ActiveRecord::Base
   validates_format_of :name, with: /\A(\w)+\Z/
   validates_length_of :name, within: 5..16
 
+  before_create -> (user) do
+    loop do
+      uid = SecureRandom.uuid
+      user.uid = uid and break if User.where(uid: uid).blank?
+    end
+  end
   before_restore -> (model) { Identity.only_deleted.where(user_id: model.id).restore_all }
 
   def fav(favorable)

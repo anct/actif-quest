@@ -95,6 +95,16 @@ RSpec.describe User, type: :model do
   end
 
   describe 'callbacks' do
+    context 'generate uid after create' do
+      let(:unsaved_user) { user = FactoryGirl.build(:user) }
+      subject { unsaved_user.uid }
+      it { is_expected.to be_blank }
+      it do
+        unsaved_user.save!
+        is_expected.to be_present
+      end
+    end
+
     context 'user has a identity' do
       before do
         user.identities << FactoryGirl.create(:identity)
