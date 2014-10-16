@@ -4,20 +4,24 @@ RSpec.describe 'Users API', type: :request do
 
   let!(:users) { FactoryGirl.create_list(:user, 5) }
 
-  describe '#show' do
+  describe 'GET /api/users/:id' do
     let(:user) { users[0] }
-    before { get api_user_path(user) }
-    it { expect(response).to be_success }
-    it { expect(response.status).to eq 200 }
+    let(:id) { users[0].id }
+    context 'w/ Authozization header' do
+      before do
+        headers['Authorization'] = "Token token=#{user.authentication_token}"
+        params['uid'] = user.uid
+      end
 
-    describe 'response body' do
-      subject { response.body }
-      it { is_expected.to have_json_type(Hash) }
-      it { is_expected.to be_json_eql(user.id).at_path('id') }
-      it { is_expected.to be_json_eql("\"#{user.name}\"").at_path('name') }
-      it { is_expected.to be_json_eql("\"#{user.screen_name}\"").at_path('screenName') }
-      it { is_expected.to have_json_path('image') }
+      it do
+        is_expected.to eq 200
+        json = response.body
+        expect(json).to have_json_type(Hash)
+        expect(json).to be_json_eql(user.id).at_path('id')
+        expect(json).to be_json_eql("\"#{user.name}\"").at_path('name')
+        expect(json).to be_json_eql("\"#{user.screen_name}\"").at_path('screenName')
+        expect(json).to have_json_path('image')
+      end
     end
   end
-
 end
