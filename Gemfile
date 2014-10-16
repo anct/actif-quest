@@ -68,6 +68,7 @@ group :test do
   gem 'faker'
   gem 'shoulda-matchers', require: false
   gem 'json_spec'
+  gem 'rspec-request_describer'
 end
 
 group :doc do

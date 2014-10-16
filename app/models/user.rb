@@ -21,6 +21,7 @@
 #  last_sign_in_ip        :string(255)
 #  authentication_token   :string(255)
 #  remember_token         :string(255)
+#  uid                    :string(255)
 #
 # Indexes
 #
@@ -29,6 +30,7 @@
 #  index_users_on_name                  (name) UNIQUE
 #  index_users_on_remember_token        (remember_token) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_uid                   (uid) UNIQUE
 #
 
 class User < ActiveRecord::Base
@@ -59,6 +61,12 @@ class User < ActiveRecord::Base
   validates_format_of :name, with: /\A(\w)+\Z/
   validates_length_of :name, within: 5..16
 
+  before_create -> (user) do
+    loop do
+      uid = SecureRandom.uuid
+      user.uid = uid and break if User.where(uid: uid).blank?
+    end
+  end
   before_restore -> (model) { Identity.only_deleted.where(user_id: model.id).restore_all }
 
   def fav(favorable)

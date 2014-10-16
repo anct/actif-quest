@@ -21,6 +21,7 @@
 #  last_sign_in_ip        :string(255)
 #  authentication_token   :string(255)
 #  remember_token         :string(255)
+#  uid                    :string(255)
 #
 # Indexes
 #
@@ -29,6 +30,7 @@
 #  index_users_on_name                  (name) UNIQUE
 #  index_users_on_remember_token        (remember_token) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_uid                   (uid) UNIQUE
 #
 
 require 'rails_helper'
@@ -93,6 +95,16 @@ RSpec.describe User, type: :model do
   end
 
   describe 'callbacks' do
+    context 'generate uid after create' do
+      let(:unsaved_user) { user = FactoryGirl.build(:user) }
+      subject { unsaved_user.uid }
+      it { is_expected.to be_blank }
+      it do
+        unsaved_user.save!
+        is_expected.to be_present
+      end
+    end
+
     context 'user has a identity' do
       before do
         user.identities << FactoryGirl.create(:identity)

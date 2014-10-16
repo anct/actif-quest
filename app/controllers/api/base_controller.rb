@@ -9,7 +9,7 @@ class Api::BaseController < ApplicationController
   private
 
     def authenticate_user_from_token!
-      user = User.find_by(name: params[:user])
+      user = User.find_by(uid: params[:uid])
       if user.present?
         authenticate_or_request_with_http_token do |token, options|
           Devise.secure_compare(user.authentication_token, token) && sign_in(user, store: false)
