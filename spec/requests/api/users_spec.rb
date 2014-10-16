@@ -8,10 +8,7 @@ RSpec.describe 'Users API', type: :request do
     let(:user) { users[0] }
     let(:id) { users[0].id }
     context 'w/ Authozization header' do
-      before do
-        headers['Authorization'] = "Token token=#{user.authentication_token}"
-        params['uid'] = user.uid
-      end
+      before { sign_in_as_user_with_token }
 
       it do
         is_expected.to eq 200

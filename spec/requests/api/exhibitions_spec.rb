@@ -2,15 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'Exhibitions API', type: :request do
 
-  let(:user) { FactoryGirl.create(:user) }
   let!(:exhibitions) { FactoryGirl.create_list(:exhibition, 5) }
 
   describe 'GET /api/exhibitions' do
     context 'w/ Authozization header' do
-      before do
-        headers['Authorization'] = "Token token=#{user.authentication_token}"
-        params['uid'] = user.uid
-      end
+      before { sign_in_as_user_with_token }
 
       it do
         is_expected.to eq 200
@@ -25,10 +21,7 @@ RSpec.describe 'Exhibitions API', type: :request do
     let(:exhibition) { exhibitions[0] }
     let(:id) { exhibitions[0].id }
     context 'w/ Authozization header' do
-      before do
-        headers['Authorization'] = "Token token=#{user.authentication_token}"
-        params['uid'] = user.uid
-      end
+      before { sign_in_as_user_with_token }
 
       it do
         is_expected.to eq 200
