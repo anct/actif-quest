@@ -16,6 +16,10 @@ group :default do
   gem 'turbolinks'
   # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
   gem 'jbuilder', '~> 2.0'
+
+  # Use unicorn as the app server
+  gem 'unicorn'
+
   gem 'carrierwave'
 
   gem 'bootstrap-sass'
@@ -68,6 +72,7 @@ group :test do
   gem 'faker'
   gem 'shoulda-matchers', require: false
   gem 'json_spec'
+  gem 'rspec-request_describer'
 end
 
 group :doc do
@@ -80,9 +85,6 @@ end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
-# Use unicorn as the app server
-# gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
