@@ -63,6 +63,11 @@ group :development do
   gem 'bullet'
 
   gem 'annotate', :git => 'https://github.com/ctran/annotate_models'
+
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano3-unicorn'
 end
 
 group :test do
