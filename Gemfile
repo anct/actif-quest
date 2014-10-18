@@ -16,6 +16,10 @@ group :default do
   gem 'turbolinks'
   # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
   gem 'jbuilder', '~> 2.0'
+
+  # Use unicorn as the app server
+  gem 'unicorn'
+
   gem 'carrierwave'
 
   gem 'bootstrap-sass'
@@ -31,6 +35,10 @@ group :default do
 
   gem 'active_model_serializers'
   gem 'kakurenbo'
+end
+
+group :staging, :production do
+  gem 'mysql2'
 end
 
 group :test, :development do
@@ -59,6 +67,11 @@ group :development do
   gem 'bullet'
 
   gem 'annotate', :git => 'https://github.com/ctran/annotate_models'
+
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano3-unicorn'
 end
 
 group :test do
@@ -81,9 +94,6 @@ end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
-# Use unicorn as the app server
-# gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
