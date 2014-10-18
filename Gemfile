@@ -39,6 +39,8 @@ end
 
 group :staging, :production do
   gem 'mysql2'
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  gem 'therubyracer',  platforms: :ruby
 end
 
 group :test, :development do
@@ -89,14 +91,8 @@ group :doc do
   gem 'sdoc', '~> 0.4.0'
 end
 
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer',  platforms: :ruby
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
