@@ -12,6 +12,6 @@
 
 FactoryGirl.define do
   factory :bound do
-    name { Faker::Name.title }
+    sequence(:name) { |n| "地点#{n}" }
   end
 end

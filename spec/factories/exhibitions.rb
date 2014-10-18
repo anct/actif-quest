@@ -16,8 +16,8 @@
 
 FactoryGirl.define do
   factory :exhibition do
-    name { Faker::Name.title }
-    introduction { Faker::Lorem.paragraph }
+    sequence(:name) { |n| "展示#{n}" }
+    sequence(:introduction) { |n| "こころ#{'ぴょん'*n}" }
     group
     bound
   end

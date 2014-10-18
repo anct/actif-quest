@@ -43,9 +43,5 @@ FactoryGirl.define do
     password 'password'
     password_confirmation 'password'
     authentication_token 'test_token'
-    image_url {
-      Faker::Config.locale = :en
-      Faker::Internet.url
-    }
   end
 end

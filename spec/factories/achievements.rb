@@ -15,8 +15,8 @@
 
 FactoryGirl.define do
   factory :achievement do
-    name { Faker::Name.title }
-    condition { Faker::Lorem.paragraph }
-    description { Faker::Lorem.paragraph }
+    sequence(:name) { |n| "実績 その#{n}" }
+    sequence(:condition) { |n| "ほげほげ#{n}したら取得できるで" }
+    sequence(:description) { |n| "こころ#{'ぴょん'*n}" }
   end
 end

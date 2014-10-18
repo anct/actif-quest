@@ -14,7 +14,7 @@
 
 FactoryGirl.define do
   factory :status do
-    body { Faker::Lorem.paragraph }
+    sequence(:body) { |n| "こころ#{'ぴょん'*n}" }
     user
   end
 end

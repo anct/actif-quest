@@ -12,6 +12,6 @@
 
 FactoryGirl.define do
   factory :notification do
-    content { Faker::Lorem.paragraph }
+    sequence(:content) { |n| "こころ#{'ぴょん'*n}" }
   end
 end

@@ -13,7 +13,7 @@
 
 FactoryGirl.define do
   factory :check_in do
-    user_id 1
-    bound_id 1
+    user
+    bound
   end
 end
