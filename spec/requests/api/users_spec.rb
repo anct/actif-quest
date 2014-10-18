@@ -10,7 +10,7 @@ RSpec.describe 'Users API', type: :request do
     context 'w/ Authozization header' do
       before { sign_in_as_user_with_token }
 
-      it do
+      it 'returns the user', :autodoc do
         is_expected.to eq 200
         json = response.body
         expect(json).to have_json_type(Hash)

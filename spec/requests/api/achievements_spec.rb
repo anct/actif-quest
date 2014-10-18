@@ -8,7 +8,7 @@ RSpec.describe 'Achievements API', type: :request do
     context 'w/ Authorization header' do
       before { sign_in_as_user_with_token }
 
-      it do
+      it 'returns the achievements', :autodoc do
         is_expected.to eq 200
         json = response.body
         expect(json).to have_json_type(Array)
