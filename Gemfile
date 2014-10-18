@@ -84,6 +84,7 @@ group :test do
   gem 'shoulda-matchers', require: false
   gem 'json_spec'
   gem 'rspec-request_describer'
+  gem 'autodoc', github: 'izumin5210/autodoc', branch: 'rspec3'
 end
 
 group :doc do
