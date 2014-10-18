@@ -20,6 +20,15 @@ test:
   <<: *default
   database: db/test.sqlite3
 
+staging:
+  adapter: mysql2
+  encoding: utf8
+  database: actif_quest
+  pool: 5
+  username: <%= ENV['STAGING_DATABASE_USERNAME'] %>
+  password: <%= ENV['STAGING_DATABASE_PASSWORD'] %>
+  host: localhost
+
 production:
   <<: *default
   database: db/production.sqlite3

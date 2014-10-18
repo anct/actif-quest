@@ -37,6 +37,10 @@ group :default do
   gem 'kakurenbo'
 end
 
+group :staging, :production do
+  gem 'mysql2'
+end
+
 group :test, :development do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
