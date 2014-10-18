@@ -67,7 +67,8 @@ class User < ActiveRecord::Base
       user.uid = uid and break if User.where(uid: uid).blank?
     end
   end
-  before_restore -> (model) { Identity.only_deleted.where(user_id: model.id).restore_all }
+
+  try :before_restore, -> (model) { Identity.only_deleted.where(user_id: model.id).restore_all }
 
   def fav(favorable)
     raise ArgumentError unless favorable.respond_to? :favorites
