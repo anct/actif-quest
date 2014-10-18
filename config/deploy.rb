@@ -40,6 +40,8 @@ set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rben
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all
 
+set :unicorn_config_path, "#{current_path}/config/unicorn.rb"
+
 after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
   task :restart do
