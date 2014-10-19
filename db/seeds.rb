@@ -17,11 +17,15 @@ Group.delete_all(nil, hard: true)
 Exhibition.delete_all(nil, hard: true)
 
 puts 'Creating admin...'
-Admin.create!(
-  email: 'test@example.com',
-  password: 'password',
-  password_confirmation: 'password'
-)
+if Rails.env.development?
+  FactoryGirl.create(:admin)
+else
+  Admin.create(
+    email: 'masayuki@izumin.info',
+    password: ENV['ADMIN_PASSWORD'] || 'password',
+    password_confirmation: ENV['ADMIN_PASSWORD'] || 'password'
+  )
+end
 
 puts 'Creating users...'
 users = FactoryGirl.create_list(:user, 30)

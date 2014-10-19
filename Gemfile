@@ -43,6 +43,10 @@ group :staging, :production do
   gem 'therubyracer',  platforms: :ruby
 end
 
+group :test, :development, :staging do
+  gem 'faker'
+end
+
 group :test, :development do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
@@ -80,7 +84,6 @@ group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'database_rewinder'
-  gem 'faker'
   gem 'shoulda-matchers', require: false
   gem 'json_spec'
   gem 'rspec-request_describer'
