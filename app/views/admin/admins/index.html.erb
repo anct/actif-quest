@@ -9,7 +9,7 @@
         <td><%= admin.name %></td>
         <td><%= admin.email %></td>
         <td><%= admin.sign_in_count %> sign in</td>
-        <td><%= admin.last_sign_in_at.to_s(:db) %></td>
+        <td><%= admin.last_sign_in_at.try(:to_s, :db) %></td>
         <td><%= admin.created_at.to_s(:db) %></td>
         <td>
           <%= admin_destroy_btn admin_admin_path(admin) %>
