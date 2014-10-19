@@ -53,6 +53,19 @@ namespace :deploy do
 end
 
 namespace :rails do
+  namespace:generate do
+    desc 'Generate admin account'
+    task :admin do
+      on roles(:db) do |h|
+        within current_path do
+          with rails_env: fetch(:rails_env) do
+            execute :rake, 'actif_quest:generate:admin'
+          end
+        end
+      end
+    end
+  end
+
   desc 'Remote console'
   task :console do
     on roles(:app) do |h|
