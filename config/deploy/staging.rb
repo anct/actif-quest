@@ -6,9 +6,9 @@ set :branch, 'develop'
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
 
-role :app, %w{deploy@app.izumin.info}
-role :web, %w{deploy@app.izumin.info}
-role :db,  %w{deploy@app.izumin.info}
+# role :app, %w{deploy@app.izumin.info}
+# role :web, %w{deploy@app.izumin.info}
+# role :db,  %w{deploy@app.izumin.info}
 
 
 # Extended Server Syntax
@@ -17,7 +17,7 @@ role :db,  %w{deploy@app.izumin.info}
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server 'app.izumin.info', user: 'deploy', roles: %w{web app db}
+server 'app.izumin.info', user: 'deploy', port: 5210, roles: %w{web app db}
 
 
 # Custom SSH Options
@@ -32,7 +32,6 @@ set :ssh_options, {
   keys: [File.expand_path('~/.ssh/id_rsa')],
   forward_agent: true,
   auth_methods: %w(publickey),
-  port: 5210
 }
 #
 # And/or per server (overrides global)
