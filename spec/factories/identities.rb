@@ -24,7 +24,7 @@
 
 FactoryGirl.define do
   factory :identity do
-    sequence(:uid) { |n| '%08d' % n }
+    uid { Faker::Number.number(10) }
     provider "facebook"
     sequence(:token) { |n| (n..n+10).map { |n| "#{n}" }.join[0...10] }
     expires_at "2014-09-07 05:07:04"

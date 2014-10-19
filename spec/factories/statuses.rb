@@ -14,7 +14,7 @@
 
 FactoryGirl.define do
   factory :status do
-    sequence(:body) { |n| "こころ#{'ぴょん'*n}" }
+    sequence(:body) { |n| "こころ#{'ぴょん'*(n%45)}" }
     user
   end
 end

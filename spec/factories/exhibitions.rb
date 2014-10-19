@@ -17,7 +17,7 @@
 FactoryGirl.define do
   factory :exhibition do
     sequence(:name) { |n| "展示#{n}" }
-    sequence(:introduction) { |n| "こころ#{'ぴょん'*n}" }
+    sequence(:introduction) { |n| "こころ#{'ぴょん'*(n%45)}" }
     group
     bound
   end
