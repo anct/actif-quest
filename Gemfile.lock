@@ -1,4 +1,14 @@
 GIT
+  remote: git://github.com/izumin5210/autodoc.git
+  revision: eb9fe34f300cddd8413ee9d24ace182229a7914b
+  branch: rspec3
+  specs:
+    autodoc (0.3.6)
+      actionpack
+      activesupport (>= 3.0.0)
+      rspec
+
+GIT
   remote: https://github.com/ctran/annotate_models
   revision: 038b13c04e575cc0f0c89c702c994166c7dc9955
   specs:
@@ -337,6 +347,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   annotate!
+  autodoc!
   autoprefixer-rails
   better_errors
   binding_of_caller

@@ -14,8 +14,8 @@
 
 FactoryGirl.define do
   factory :favorite do
-    user_id 1
-    favorable_id 1
-    favorable_type "MyString"
+    user
+    exhibition
+    favorable_type Exhibition.name
   end
 end

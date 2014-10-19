@@ -19,11 +19,11 @@
 FactoryGirl.define do
   factory :beacon do
     uuid "379502e7-f178-4ba5-92e1-4d20f6c513df"
-    minor { Faker::Number.number(5) }
-    major { Faker::Number.number(5) }
-    latitude { Faker::Address.latitude }
-    longitude { Faker::Address.longitude }
-    floor { Faker::Number.digit }
+    sequence(:minor) { |n| '%05d' % n }
+    sequence(:major) { |n| '%05d' % (n*2) }
+    sequence(:latitude) { |n| 139.75550025701523 + n * 0.0001 }
+    sequence(:longitude) { |n| 39.801878433658466 + n * 0.0001 }
+    sequence(:floor) { |n| n % 3 + 1 }
     bound
   end
 end
