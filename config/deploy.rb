@@ -43,6 +43,8 @@ set :rbenv_roles, :all
 set :unicorn_config_path, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "#{current_path}/tmp/actif-quest.pid"
 
+SSHKit.config.command_map[:rake] = 'bundle exec rake'
+
 after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
   task :restart do
@@ -61,5 +63,32 @@ namespace :rails do
   def run_interactively(command, user)
     info "Running `#{command}` as #{user}@#{host}"
     exec %Q(ssh #{user}@#{host} -p #{host.port} -t "bash --login -c 'cd #{fetch(:deploy_to)}/current && #{command}'")
+  end
+end
+
+namespace :db do
+
+  namespace :migrate do
+    desc 'Reset and migrate the database'
+    task :reset do
+      on roles(:db) do |h|
+        within current_path do
+          with rails_env: fetch(:rails_env) do
+            execute :rake, 'db:migrate:reset'
+          end
+        end
+      end
+    end
+  end
+
+  desc 'Load the seed data'
+  task :seed do
+    on roles(:db) do |h|
+      within current_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'db:seed'
+        end
+      end
+    end
   end
 end
