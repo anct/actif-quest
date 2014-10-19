@@ -17,6 +17,6 @@ FactoryGirl.define do
   factory :achievement do
     sequence(:name) { |n| "実績 その#{n}" }
     sequence(:condition) { |n| "ほげほげ#{n}したら取得できるで" }
-    sequence(:description) { |n| "こころ#{'ぴょん'*n}" }
+    sequence(:description) { |n| "こころ#{'ぴょん'*(n%45)}" }
   end
 end
