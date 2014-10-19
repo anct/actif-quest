@@ -19,9 +19,10 @@ if Rails.env.development?
   Admin.all.delete_all(nil, hard: true)
   FactoryGirl.create(:admin)
 else
+  email = 'masayuki@izumin.info',
   if Admin.where(email: email).blank?
     Admin.create(
-      email: 'masayuki@izumin.info',
+      email: email,
       password: ENV['ADMIN_PASSWORD'] || 'password',
       password_confirmation: ENV['ADMIN_PASSWORD'] || 'password'
     )
