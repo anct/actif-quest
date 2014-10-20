@@ -180,6 +180,10 @@ RSpec.describe User, type: :model do
     context 'w/ invalid argument' do
       it { expect { user.post(nil) }.to raise_error(ArgumentError) }
     end
+
+    context 'when body is too long' do
+      it { expect { user.post('ぴょん'*47) }.to raise_error(ActiveRecord::RecordInvalid) }
+    end
   end
 
   describe '#fav' do

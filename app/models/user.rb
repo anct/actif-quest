@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
 
   def post(body)
     raise ArgumentError if body.blank?
-    self.statuses.create(body: body)
+    self.statuses.create!(body: body)
   end
 
   def vote(votable)
