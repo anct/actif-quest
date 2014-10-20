@@ -36,4 +36,46 @@ RSpec.describe 'Exhibitions API', type: :request do
     end
   end
 
+  describe 'POST /api/exhibitions/:id/vote' do
+    context 'w/ Authozization header' do
+      before { @user = sign_in_as_user_with_token }
+      context 'w/ valid exhibition id' do
+        let(:exhibition) { exhibitions[0] }
+        let(:id) { exhibition.id }
+        context 'have not yet voted' do
+          it 'returns 201 created', :autodoc do
+            is_expected.to eq 201
+            expect(response.body).to_not have_json_path('error')
+            expect(@user.votes.where(votable: exhibition)).to be_present
+          end
+        end
+
+        context 'have already voted' do
+          before { @user.votes.create(votable: exhibition) }
+          it 'returns 304 not modified' do
+            is_expected.to eq 409
+            json = response.body
+            expect(json).to have_json_path('error')
+            expect(json).to have_json_path('error/message')
+            expect(json).to be_json_eql(%("That exhibition have already voted.")).at_path('error/message')
+          end
+        end
+      end
+
+      context 'w/ valid exhibition id' do
+        let(:id) do
+          id = exhibitions.last.id
+          ids = Exhibition.pluck(:id)
+          loop { return id unless ids.include?(id+=1) }
+        end
+        it 'returns 404 not found' do
+          is_expected.to eq 404
+          json = response.body
+          expect(json).to have_json_path('error')
+          expect(json).to have_json_path('error/message')
+          expect(json).to be_json_eql(%("That exhibition does not exist.")).at_path('error/message')
+        end
+      end
+    end
+  end
 end
