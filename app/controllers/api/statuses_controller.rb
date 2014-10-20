@@ -1,5 +1,6 @@
 class Api::StatusesController < Api::BaseController
-  before_action :set_status, only: [:destroy, :fav, :unfav]
+  before_action :set_status, only: [:fav, :unfav]
+  before_action :set_user_status, only: [:destroy]
 
   def index
     @statuses = Status.includes(:user).page(params[:page]).per(100)
@@ -16,7 +17,7 @@ class Api::StatusesController < Api::BaseController
   end
 
   def destroy
-    @favorite =current_user.destroy(@status)
+    current_user.destroy(@status)
     render json: @status, status: :no_content
   end
 
@@ -33,6 +34,16 @@ class Api::StatusesController < Api::BaseController
   private
     def set_status
       @status = Status.find(params[:id])
+    end
+
+    def set_user_status
+      @status = current_user.statuses.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      if Status.where(id: params[:id]).present?
+        render json: { error: { message: 'That status is not current user\'s.' } }, status: :forbidden
+      else
+        render json: { error: { message: 'That status does not exist.' } }, status: :not_found
+      end
     end
 
     def status_params

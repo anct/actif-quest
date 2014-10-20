@@ -53,4 +53,47 @@ RSpec.describe 'Statuses API', type: :request do
       end
     end
   end
+
+  describe 'DELETE /api/statuses/:id' do
+    context 'w/ Authorization header' do
+      before { @user = sign_in_as_user_with_token }
+      context 'when the status is user\'s' do
+        let(:id) { FactoryGirl.create(:status, user: @user).id }
+        it 'returns 204 no content', :autodoc do
+          is_expected.to eq 204
+          expect(response.body).to be_blank
+          expect(Status.where(id: id)).to be_empty
+        end
+      end
+
+      context 'when the status does not exist' do
+        let(:id) do
+          ids = Status.pluck(:id)
+          id = ids.last || 1
+          loop { return id unless ids.include?(id+=1) }
+        end
+        it 'returns 404 not found' do
+          is_expected.to eq 404
+          json = response.body
+          expect(json).to have_json_path('error')
+          expect(json).to have_json_path('error/message')
+          expect(json).to be_json_eql(%("That status does not exist.")).at_path('error/message')
+        end
+      end
+
+      context 'when the status is not user\'s' do
+        let(:id) do
+          other_user = FactoryGirl.create(:user)
+          FactoryGirl.create(:status, user: other_user).id
+        end
+        it 'returns 403 forbidden' do
+          is_expected.to eq 403
+          json = response.body
+          expect(json).to have_json_path('error')
+          expect(json).to have_json_path('error/message')
+          expect(json).to be_json_eql(%("That status is not current user's.")).at_path('error/message')
+        end
+      end
+    end
+  end
 end
