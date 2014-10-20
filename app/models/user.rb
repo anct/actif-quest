@@ -87,7 +87,7 @@ class User < ActiveRecord::Base
 
   def vote(votable)
     raise ArgumentError unless votable.respond_to? :votes
-    self.votes.find_or_create_by(votable: votable)
+    self.votes.build(votable: votable).save
   end
 
   def unvote(votable)

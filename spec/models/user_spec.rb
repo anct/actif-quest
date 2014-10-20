@@ -142,7 +142,7 @@ RSpec.describe User, type: :model do
       context 'already voted' do
         before { user.votes.create!(votable: votable) }
         it { expect { user.vote(votable) }.to change(Vote, :count).by(0) }
-        it { expect(user.vote(votable)).to be_persisted }
+        it { expect(user.vote(votable)).to be false }
       end
     end
 
