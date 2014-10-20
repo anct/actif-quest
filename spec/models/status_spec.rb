@@ -33,5 +33,7 @@ RSpec.describe Status, :type => :model do
 
   describe 'validation' do
     it { is_expected.to validate_presence_of(:body) }
+    it { is_expected.to ensure_length_of(:body).is_at_most(140) }
+    it { is_expected.to ensure_length_of(:body).is_at_least(1) }
   end
 end

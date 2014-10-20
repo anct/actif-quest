@@ -21,4 +21,5 @@ class Status < ActiveRecord::Base
 
   validates :user_id, presence: true
   validates :body, presence: true
+  validates_length_of :body, within: 1..140
 end
