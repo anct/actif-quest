@@ -16,4 +16,41 @@ RSpec.describe 'Statuses API', type: :request do
       end
     end
   end
+
+  describe 'POST /api/statuses' do
+    context 'w/ Authozization header' do
+      before { sign_in_as_user_with_token }
+      context 'w/ valid body' do
+        let(:params) { { status: FactoryGirl.attributes_for(:status) } }
+        it 'returns 201 created', :autodoc do
+          is_expected.to eq 201
+          json = response.body
+          expect(json).to_not have_json_path('error')
+          expect(json).to be_json_eql(%("#{params[:status][:body]}")).at_path('body')
+        end
+      end
+
+      context 'when body is too long' do
+        let(:params) { { status: { body: 'a' * 256 } } }
+        it 'returns 404 bad request' do
+          is_expected.to eq 400
+          json = response.body
+          expect(json).to have_json_path('error')
+          expect(json).to have_json_path('error/message')
+          expect(json).to be_json_eql(%("That status body is invalid.")).at_path('error/message')
+        end
+      end
+
+      context 'when body is empty' do
+        let(:params) { { status: { body: '' } } }
+        it 'returns 404 bad request' do
+          is_expected.to eq 400
+          json = response.body
+          expect(json).to have_json_path('error')
+          expect(json).to have_json_path('error/message')
+          expect(json).to be_json_eql(%("That status body is empty.")).at_path('error/message')
+        end
+      end
+    end
+  end
 end

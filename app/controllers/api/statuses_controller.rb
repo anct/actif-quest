@@ -9,6 +9,10 @@ class Api::StatusesController < Api::BaseController
   def create
     @status = current_user.post(status_params[:body])
     render json: @status, status: :created
+  rescue ActiveRecord::RecordInvalid
+    render json: { error: { message: 'That status body is invalid.' } }, status: :bad_request
+  rescue ArgumentError
+    render json: { error: { message: 'That status body is empty.' } }, status: :bad_request
   end
 
   def destroy
@@ -32,6 +36,6 @@ class Api::StatusesController < Api::BaseController
     end
 
     def status_params
-      params.require(:status).permit(:user, :body)
+      params.require(:status).permit(:body)
     end
 end
