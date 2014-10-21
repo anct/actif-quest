@@ -22,8 +22,11 @@ class Api::StatusesController < Api::BaseController
   end
 
   def fav
-    @fav = current_user.fav(@status)
-    render json: @status, status: :created
+    if current_user.fav(@status)
+      render json: @status, status: :created
+    else
+      render json: { error: { message: 'That status has already favored by current user.' } }, status: :conflict
+    end
   end
 
   def unfav
@@ -34,6 +37,8 @@ class Api::StatusesController < Api::BaseController
   private
     def set_status
       @status = Status.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render json: { error: { message: 'That status does not exist.' } }, status: :not_found
     end
 
     def set_user_status
