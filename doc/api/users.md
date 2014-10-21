@@ -5,7 +5,7 @@ Returns the user.
 
 #### Request
 ```
-GET /api/users/1?uid=2d76b7b6-d0ea-4026-a17c-ff582d3abae7 HTTP/1.1
+GET /api/users/1?uid=71493694-64e4-4627-9288-1e217eaed9cb HTTP/1.1
 Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
 Authorization: Token token=test_token
 Content-Length: 0
@@ -23,8 +23,8 @@ ETag: "29899aa56c14522c3ab932109ca2127a"
 Set-Cookie: request_method=GET; path=/
 X-Content-Type-Options: nosniff
 X-Frame-Options: SAMEORIGIN
-X-Request-Id: a029fb30-7922-4151-8fc1-4f8e372a52f5
-X-Runtime: 0.011588
+X-Request-Id: 6473786b-988b-4aaf-a3c0-0100bef5e79b
+X-Runtime: 0.012425
 X-XSS-Protection: 1; mode=block
 
 {

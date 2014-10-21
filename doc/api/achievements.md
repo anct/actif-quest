@@ -5,7 +5,7 @@ Returns the achievements.
 
 #### Request
 ```
-GET /api/achievements?uid=1ce3421b-653b-4085-8a7e-3a1f5ff1d571 HTTP/1.1
+GET /api/achievements?uid=3d722d41-9ae8-42b8-a3d7-577cb37c3557 HTTP/1.1
 Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
 Authorization: Token token=test_token
 Content-Length: 0
@@ -23,8 +23,8 @@ ETag: "e039edc8d1e33a44c8fb96eb56bb4787"
 Set-Cookie: request_method=GET; path=/
 X-Content-Type-Options: nosniff
 X-Frame-Options: SAMEORIGIN
-X-Request-Id: b6fe8f12-d947-4971-b19d-16b85132ad57
-X-Runtime: 0.054651
+X-Request-Id: b2bf4905-580b-45ad-b7ab-d3b45e444afa
+X-Runtime: 0.046857
 X-XSS-Protection: 1; mode=block
 
 [

@@ -5,7 +5,7 @@ Returns the beacons.
 
 #### Request
 ```
-GET /api/beacons?uid=9617ed06-07a5-4667-b6ac-74db2500495a HTTP/1.1
+GET /api/beacons?uid=59d97c94-1363-49c3-bbcd-ea56eee64089 HTTP/1.1
 Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
 Authorization: Token token=test_token
 Content-Length: 0
@@ -23,8 +23,8 @@ ETag: "e4f2d7c7aec2fe488931f0cbe81fdde7"
 Set-Cookie: request_method=GET; path=/
 X-Content-Type-Options: nosniff
 X-Frame-Options: SAMEORIGIN
-X-Request-Id: e0caa563-2ce8-4b54-bba7-6ae8a9d2b3ef
-X-Runtime: 0.016727
+X-Request-Id: d0745890-65ff-4e79-9b58-0e97d3b17269
+X-Runtime: 0.020613
 X-XSS-Protection: 1; mode=block
 
 [
