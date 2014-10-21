@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
 
   def unfav(favorable)
     raise ArgumentError unless favorable.respond_to? :favorites
-    self.favorites.find_by(favorable: favorable).try(:destroy)
+    self.favorites.find_by(favorable: favorable).try(:destroy).present?
   end
 
   def post(body)

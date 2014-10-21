@@ -218,11 +218,13 @@ RSpec.describe User, type: :model do
       let(:favorable) { FavorableObject.new }
       context 'not yet faved' do
         it { expect { user.unfav(favorable) }.to change(Favorite, :count).by(0) }
+        it { expect(user.unfav(favorable)).to be false }
       end
 
       context 'already faved' do
         before { user.favorites.create!(favorable: favorable); }
         it { expect { user.unfav(favorable) }.to change(Favorite, :count).by(-1) }
+        it { expect(user.unfav(favorable)).to be true }
       end
     end
 
