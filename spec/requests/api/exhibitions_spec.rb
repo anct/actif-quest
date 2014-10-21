@@ -69,7 +69,7 @@ RSpec.describe 'Exhibitions API', type: :request do
 
         context 'have already voted' do
           before { @user.votes.create(votable: exhibition) }
-          it 'returns 304 not modified' do
+          it 'returns 409 conflict' do
             is_expected.to eq 409
             json = response.body
             expect(json).to have_json_path('error')
