@@ -257,12 +257,13 @@ RSpec.describe User, type: :model do
       let(:treasure) { FactoryGirl.create(:treasure) }
       context 'not yet taken' do
         it { expect { user.take(treasure) }.to change(Treasure, :count).by(1) }
+        it { expect(user.take(treasure)).to be true }
       end
 
       context 'already taken' do
         before { user.taken_treasures.create(treasure: treasure) }
         it { expect { user.take(treasure) }.to change(Treasure, :count).by(0) }
-        it { expect(user.take(treasure)).to be_persisted }
+        it { expect(user.take(treasure)).to be false }
       end
     end
 
