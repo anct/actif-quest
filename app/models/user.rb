@@ -72,22 +72,22 @@ class User < ActiveRecord::Base
 
   def fav(favorable)
     raise ArgumentError unless favorable.respond_to? :favorites
-    self.favorites.find_or_create_by(favorable: favorable)
+    self.favorites.build(favorable: favorable).save
   end
 
   def unfav(favorable)
     raise ArgumentError unless favorable.respond_to? :favorites
-    self.favorites.find_by(favorable: favorable).try(:destroy)
+    self.favorites.find_by(favorable: favorable).try(:destroy).present?
   end
 
   def post(body)
     raise ArgumentError if body.blank?
-    self.statuses.create(body: body)
+    self.statuses.create!(body: body)
   end
 
   def vote(votable)
     raise ArgumentError unless votable.respond_to? :votes
-    self.votes.find_or_create_by(votable: votable)
+    self.votes.build(votable: votable).save
   end
 
   def unvote(votable)
@@ -107,7 +107,7 @@ class User < ActiveRecord::Base
 
   def take(treasure)
     raise ArgumentError unless treasure.is_a? Treasure
-    self.taken_treasures.create treasure: treasure
+    self.taken_treasures.build(treasure: treasure).save
   end
   
   def has_provider?(provider)

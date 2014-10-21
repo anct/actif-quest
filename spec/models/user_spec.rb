@@ -137,12 +137,13 @@ RSpec.describe User, type: :model do
       let(:votable) { VotableObject.new }
       context 'not yet voted' do
         it { expect { user.vote(votable) }.to change(Vote, :count).by(1) }
+        it { expect(user.vote(votable)).to be true }
       end
 
       context 'already voted' do
         before { user.votes.create!(votable: votable) }
         it { expect { user.vote(votable) }.to change(Vote, :count).by(0) }
-        it { expect(user.vote(votable)).to be_persisted }
+        it { expect(user.vote(votable)).to be false }
       end
     end
 
@@ -180,6 +181,10 @@ RSpec.describe User, type: :model do
     context 'w/ invalid argument' do
       it { expect { user.post(nil) }.to raise_error(ArgumentError) }
     end
+
+    context 'when body is too long' do
+      it { expect { user.post('ぴょん'*47) }.to raise_error(ActiveRecord::RecordInvalid) }
+    end
   end
 
   describe '#fav' do
@@ -190,12 +195,13 @@ RSpec.describe User, type: :model do
       let(:favorable) { FavorableObject.new }
       context 'not yet faved' do
         it { expect { user.fav(favorable) }.to change(Favorite, :count).by(1) }
+        it { expect(user.fav(favorable)).to be true }
       end
 
       context 'already faved' do
         before { user.favorites.create!(favorable: favorable); }
         it { expect { user.fav(favorable) }.to change(Favorite, :count).by(0) }
-        it { expect(user.fav(favorable)).to be_persisted }
+        it { expect(user.fav(favorable)).to be false }
       end
     end
 
@@ -212,11 +218,13 @@ RSpec.describe User, type: :model do
       let(:favorable) { FavorableObject.new }
       context 'not yet faved' do
         it { expect { user.unfav(favorable) }.to change(Favorite, :count).by(0) }
+        it { expect(user.unfav(favorable)).to be false }
       end
 
       context 'already faved' do
         before { user.favorites.create!(favorable: favorable); }
         it { expect { user.unfav(favorable) }.to change(Favorite, :count).by(-1) }
+        it { expect(user.unfav(favorable)).to be true }
       end
     end
 
@@ -249,12 +257,13 @@ RSpec.describe User, type: :model do
       let(:treasure) { FactoryGirl.create(:treasure) }
       context 'not yet taken' do
         it { expect { user.take(treasure) }.to change(Treasure, :count).by(1) }
+        it { expect(user.take(treasure)).to be true }
       end
 
       context 'already taken' do
         before { user.taken_treasures.create(treasure: treasure) }
         it { expect { user.take(treasure) }.to change(Treasure, :count).by(0) }
-        it { expect(user.take(treasure)).to be_persisted }
+        it { expect(user.take(treasure)).to be false }
       end
     end
 

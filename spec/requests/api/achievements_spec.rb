@@ -13,7 +13,10 @@ RSpec.describe 'Achievements API', type: :request do
         json = response.body
         expect(json).to have_json_type(Array)
         expect(json).to have_json_size(5)
+        expect(json).to_not have_errors
       end
     end
+
+    it_behaves_like 'w/o Authorization header'
   end
 end

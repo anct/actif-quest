@@ -13,4 +13,6 @@ class TakenTreasure < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :treasure
+
+  validates_uniqueness_of :user_id, scope: :treasure_id
 end

@@ -1,5 +1,5 @@
 class TreasureSerializer < ActiveModel::Serializer
-  attributes :id, :description, :image_url
+  attributes :id, :name, :description, :image_url
 
   has_one :bound
   

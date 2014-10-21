@@ -12,11 +12,17 @@ class Api::ExhibitionsController < Api::BaseController
 
   def vote
     @vote = current_user.vote(@exhibition)
-    render json: @vote, status: :created
+    if @vote.present?
+      render json: @vote, status: :created
+    else
+      render json: { error: { message: 'That exhibition have already voted.' } }, status: :conflict
+    end
   end
 
   private
     def set_exhibition
       @exhibition = Exhibition.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render json: { error: { message: 'That exhibition does not exist.' } }, status: :not_found
     end
 end
