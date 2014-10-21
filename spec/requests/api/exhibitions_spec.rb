@@ -16,6 +16,8 @@ RSpec.describe 'Exhibitions API', type: :request do
         expect(json).to_not have_errors
       end
     end
+
+    it_behaves_like 'w/o Authorization header'
   end
 
   describe 'GET /api/exhibitions/:id' do
@@ -45,6 +47,10 @@ RSpec.describe 'Exhibitions API', type: :request do
           expect(response.body).to have_error_message('That exhibition does not exist.')
         end
       end
+    end
+
+    it_behaves_like 'w/o Authorization header' do
+      let(:id) { exhibitions[0].id }
     end
   end
 
@@ -78,6 +84,10 @@ RSpec.describe 'Exhibitions API', type: :request do
           expect(response.body).to have_error_message('That exhibition does not exist.')
         end
       end
+    end
+
+    it_behaves_like 'w/o Authorization header' do
+      let(:id) { exhibitions[0].id }
     end
   end
 end

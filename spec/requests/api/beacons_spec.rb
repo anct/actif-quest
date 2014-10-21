@@ -16,5 +16,7 @@ RSpec.describe 'Beacons API', type: :request do
         expect(json).to_not have_errors
       end
     end
+
+    it_behaves_like 'w/o Authorization header'
   end
 end

@@ -16,6 +16,8 @@ RSpec.describe 'Bounds API', type: :request do
         expect(json).to_not have_errors
       end
     end
+
+    it_behaves_like 'w/o Authorization header'
   end
 
   describe 'POST /api/bounds/:id/check_in' do
@@ -37,6 +39,10 @@ RSpec.describe 'Bounds API', type: :request do
           expect(response.body).to have_error_message('That bound does not exist.')
         end
       end
+    end
+
+    it_behaves_like 'w/o Authorization header' do
+      let(:id) { bounds[0].id }
     end
   end
 end

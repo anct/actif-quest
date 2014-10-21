@@ -16,6 +16,8 @@ RSpec.describe 'Statuses API', type: :request do
         expect(json).to_not have_errors
       end
     end
+
+    it_behaves_like 'w/o Authorization header'
   end
 
   describe 'POST /api/statuses' do
@@ -47,6 +49,8 @@ RSpec.describe 'Statuses API', type: :request do
         end
       end
     end
+
+    it_behaves_like 'w/o Authorization header'
   end
 
   describe 'DELETE /api/statuses/:id' do
@@ -80,6 +84,10 @@ RSpec.describe 'Statuses API', type: :request do
           expect(response.body).to have_error_message('That status is not current user\'s.')
         end
       end
+    end
+
+    it_behaves_like 'w/o Authorization header' do
+        let(:id) { statuses[0].id }
     end
   end
 
@@ -115,6 +123,10 @@ RSpec.describe 'Statuses API', type: :request do
         end
       end
     end
+
+    it_behaves_like 'w/o Authorization header' do
+        let(:id) { statuses[0].id }
+    end
   end
 
   describe 'DELETE /api/statuses/:id/favorites' do
@@ -147,6 +159,10 @@ RSpec.describe 'Statuses API', type: :request do
           expect(response.body).to have_error_message('That status does not exist.')
         end
       end
+    end
+
+    it_behaves_like 'w/o Authorization header' do
+        let(:id) { statuses[0].id }
     end
   end
 end

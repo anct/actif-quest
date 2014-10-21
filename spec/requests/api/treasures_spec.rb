@@ -15,6 +15,8 @@ RSpec.describe 'Treasures API', type: :request do
         expect(json).to_not have_errors
       end
     end
+
+    it_behaves_like 'w/o Authorization header'
   end
 
   describe 'GET /api/treasures/:id' do
@@ -43,6 +45,10 @@ RSpec.describe 'Treasures API', type: :request do
           expect(response.body).to have_error_message('That treasure does not exist.')
         end
       end
+    end
+
+    it_behaves_like 'w/o Authorization header' do
+      let(:id) { treasures[0].id }
     end
   end
 
@@ -77,6 +83,10 @@ RSpec.describe 'Treasures API', type: :request do
           expect(response.body).to have_error_message('That treasure does not exist.')
         end
       end
+    end
+
+    it_behaves_like 'w/o Authorization header' do
+      let(:id) { treasures[0].id }
     end
   end
 end
