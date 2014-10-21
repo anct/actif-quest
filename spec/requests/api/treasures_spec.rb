@@ -6,7 +6,13 @@ RSpec.describe 'Treasures API', type: :request do
 
   describe 'GET /api/treasures' do
     context 'w/ Authorization header' do
-      it 'returns 200 ok', :autodoc
+      before { @user = sign_in_as_user_with_token }
+      it 'returns 200 ok', :autodoc do
+        is_expected.to eq 200
+        json = response.body
+        expect(json).to have_json_type(Array)
+        expect(json).to have_json_size(5)
+      end
     end
   end
 
