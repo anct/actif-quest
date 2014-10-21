@@ -30,8 +30,11 @@ class Api::StatusesController < Api::BaseController
   end
 
   def unfav
-    @unfav = current_user.unfav(@status)
-    render json: @status, status: :no_content
+    if current_user.unfav(@status)
+      render json: nil, status: :no_content
+    else
+      render json: { error: { message: 'That status has not yet favored by current user.' } }, status: :not_found
+    end
   end
 
   private

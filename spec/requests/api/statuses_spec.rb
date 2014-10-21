@@ -140,4 +140,47 @@ RSpec.describe 'Statuses API', type: :request do
       end
     end
   end
+
+  describe 'DELETE /api/statuses/:id/favorites' do
+    context 'w/ Authorization header' do
+      before { @user = sign_in_as_user_with_token }
+      context 'when the status has already favored' do
+        let(:id) do
+          statuses[0].tap { |status| @user.favorites.create(favorable: status) }.id
+        end
+        it 'returns 204 no content', :autodoc do
+          is_expected.to eq 204
+          json = response.body
+          expect(json).to_not have_json_path('error')
+          expect(json).to be_empty
+        end
+      end
+
+      context 'when the status has not yet favored' do
+        let(:id) { statuses[0].id }
+        it 'returns 404 not found' do
+          is_expected.to eq 404
+          json = response.body
+          expect(json).to have_json_path('error')
+          expect(json).to have_json_path('error/message')
+          expect(json).to be_json_eql(%("That status has not yet favored by current user.")).at_path('error/message')
+        end
+      end
+
+      context 'whent the status does not exist' do
+        let(:id) do
+          ids = Status.pluck(:id)
+          id = ids.last || 1
+          loop { return id unless ids.include?(id+=1) }
+        end
+        it 'returns 404 not found' do
+          is_expected.to eq 404
+          json = response.body
+          expect(json).to have_json_path('error')
+          expect(json).to have_json_path('error/message')
+          expect(json).to be_json_eql(%("That status does not exist.")).at_path('error/message')
+        end
+      end
+    end
+  end
 end
