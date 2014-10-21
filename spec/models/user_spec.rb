@@ -137,6 +137,7 @@ RSpec.describe User, type: :model do
       let(:votable) { VotableObject.new }
       context 'not yet voted' do
         it { expect { user.vote(votable) }.to change(Vote, :count).by(1) }
+        it { expect(user.vote(votable)).to be true }
       end
 
       context 'already voted' do
@@ -194,12 +195,13 @@ RSpec.describe User, type: :model do
       let(:favorable) { FavorableObject.new }
       context 'not yet faved' do
         it { expect { user.fav(favorable) }.to change(Favorite, :count).by(1) }
+        it { expect(user.fav(favorable)).to be true }
       end
 
       context 'already faved' do
         before { user.favorites.create!(favorable: favorable); }
         it { expect { user.fav(favorable) }.to change(Favorite, :count).by(0) }
-        it { expect(user.fav(favorable)).to be_persisted }
+        it { expect(user.fav(favorable)).to be false }
       end
     end
 

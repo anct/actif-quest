@@ -72,7 +72,7 @@ class User < ActiveRecord::Base
 
   def fav(favorable)
     raise ArgumentError unless favorable.respond_to? :favorites
-    self.favorites.find_or_create_by(favorable: favorable)
+    self.favorites.build(favorable: favorable).save
   end
 
   def unfav(favorable)
