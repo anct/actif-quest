@@ -12,5 +12,15 @@
 require 'rails_helper'
 
 RSpec.describe TakenTreasure, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  subject { TakenTreasure.new }
+
+  describe 'associations' do
+    it { is_expected.to belong_to :user }
+    it { is_expected.to belong_to :treasure }
+  end
+
+  describe 'validations' do
+    it { is_expected.to validate_uniqueness_of(:user_id).scoped_to(:treasure_id) }
+  end
 end
