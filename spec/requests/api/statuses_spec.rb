@@ -115,7 +115,7 @@ RSpec.describe 'Statuses API', type: :request do
         let(:id) do
           statuses[0].tap { |status| @user.favorites.create(favorable: status) }.id
         end
-        it 'returns 409 conflict', :autodoc do
+        it 'returns 409 conflict' do
           is_expected.to eq 409
           json = response.body
           expect(json).to have_json_path('error')
