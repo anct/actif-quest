@@ -13,6 +13,7 @@ RSpec.describe 'Statuses API', type: :request do
         json = response.body
         expect(json).to have_json_type(Array)
         expect(json).to have_json_size(5)
+        expect(json).to_not have_errors
       end
     end
   end
@@ -25,7 +26,7 @@ RSpec.describe 'Statuses API', type: :request do
         it 'returns 201 created', :autodoc do
           is_expected.to eq 201
           json = response.body
-          expect(json).to_not have_json_path('error')
+          expect(json).to_not have_errors
           expect(json).to be_json_eql(%("#{params[:status][:body]}")).at_path('body')
         end
       end
@@ -34,10 +35,7 @@ RSpec.describe 'Statuses API', type: :request do
         let(:params) { { status: { body: 'a' * 256 } } }
         it 'returns 404 bad request' do
           is_expected.to eq 400
-          json = response.body
-          expect(json).to have_json_path('error')
-          expect(json).to have_json_path('error/message')
-          expect(json).to be_json_eql(%("That status body is invalid.")).at_path('error/message')
+          expect(response.body).to have_error_message('That status body is invalid.')
         end
       end
 
@@ -45,10 +43,7 @@ RSpec.describe 'Statuses API', type: :request do
         let(:params) { { status: { body: '' } } }
         it 'returns 404 bad request' do
           is_expected.to eq 400
-          json = response.body
-          expect(json).to have_json_path('error')
-          expect(json).to have_json_path('error/message')
-          expect(json).to be_json_eql(%("That status body is empty.")).at_path('error/message')
+          expect(response.body).to have_error_message('That status body is empty.')
         end
       end
     end
@@ -63,21 +58,15 @@ RSpec.describe 'Statuses API', type: :request do
           is_expected.to eq 204
           expect(response.body).to be_blank
           expect(Status.where(id: id)).to be_empty
+          expect(response.body).to_not have_errors
         end
       end
 
       context 'when the status does not exist' do
-        let(:id) do
-          ids = Status.pluck(:id)
-          id = ids.last || 1
-          loop { return id unless ids.include?(id+=1) }
-        end
+        let(:id) { not_existed_id(Status) }
         it 'returns 404 not found' do
           is_expected.to eq 404
-          json = response.body
-          expect(json).to have_json_path('error')
-          expect(json).to have_json_path('error/message')
-          expect(json).to be_json_eql(%("That status does not exist.")).at_path('error/message')
+          expect(response.body).to have_error_message('That status does not exist.')
         end
       end
 
@@ -88,10 +77,7 @@ RSpec.describe 'Statuses API', type: :request do
         end
         it 'returns 403 forbidden' do
           is_expected.to eq 403
-          json = response.body
-          expect(json).to have_json_path('error')
-          expect(json).to have_json_path('error/message')
-          expect(json).to be_json_eql(%("That status is not current user's.")).at_path('error/message')
+          expect(response.body).to have_error_message('That status is not current user\'s.')
         end
       end
     end
@@ -105,9 +91,9 @@ RSpec.describe 'Statuses API', type: :request do
         it 'returns 201 created', :autodoc do
           is_expected.to eq 201
           json = response.body
-          expect(json).to_not have_json_path('error')
           expect(json).to have_json_path('id')
           expect(json).to be_json_eql(id).at_path('id')
+          expect(json).to_not have_errors
         end
       end
 
@@ -117,25 +103,15 @@ RSpec.describe 'Statuses API', type: :request do
         end
         it 'returns 409 conflict' do
           is_expected.to eq 409
-          json = response.body
-          expect(json).to have_json_path('error')
-          expect(json).to have_json_path('error/message')
-          expect(json).to be_json_eql(%("That status has already favored by current user.")).at_path('error/message')
+          expect(response.body).to have_error_message('That status has already favored by current user.')
         end
       end
 
       context 'when the status does not exist' do
-        let(:id) do
-          ids = Status.pluck(:id)
-          id = ids.last || 1
-          loop { return id unless ids.include?(id+=1) }
-        end
+        let(:id) { not_existed_id(Status) }
         it 'returns 404 not found' do
           is_expected.to eq 404
-          json = response.body
-          expect(json).to have_json_path('error')
-          expect(json).to have_json_path('error/message')
-          expect(json).to be_json_eql(%("That status does not exist.")).at_path('error/message')
+          expect(response.body).to have_error_message('That status does not exist.')
         end
       end
     end
@@ -151,8 +127,8 @@ RSpec.describe 'Statuses API', type: :request do
         it 'returns 204 no content', :autodoc do
           is_expected.to eq 204
           json = response.body
-          expect(json).to_not have_json_path('error')
           expect(json).to be_empty
+          expect(json).to_not have_errors
         end
       end
 
@@ -160,25 +136,15 @@ RSpec.describe 'Statuses API', type: :request do
         let(:id) { statuses[0].id }
         it 'returns 404 not found' do
           is_expected.to eq 404
-          json = response.body
-          expect(json).to have_json_path('error')
-          expect(json).to have_json_path('error/message')
-          expect(json).to be_json_eql(%("That status has not yet favored by current user.")).at_path('error/message')
+          expect(response.body).to have_error_message('That status has not yet favored by current user.')
         end
       end
 
       context 'whent the status does not exist' do
-        let(:id) do
-          ids = Status.pluck(:id)
-          id = ids.last || 1
-          loop { return id unless ids.include?(id+=1) }
-        end
+        let(:id) { not_existed_id(Status) }
         it 'returns 404 not found' do
           is_expected.to eq 404
-          json = response.body
-          expect(json).to have_json_path('error')
-          expect(json).to have_json_path('error/message')
-          expect(json).to be_json_eql(%("That status does not exist.")).at_path('error/message')
+          expect(response.body).to have_error_message('That status does not exist.')
         end
       end
     end

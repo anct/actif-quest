@@ -13,6 +13,7 @@ RSpec.describe 'Bounds API', type: :request do
         json = response.body
         expect(json).to have_json_type(Array)
         expect(json).to have_json_size(5)
+        expect(json).to_not have_errors
       end
     end
   end
@@ -24,23 +25,16 @@ RSpec.describe 'Bounds API', type: :request do
         let(:id) { bounds[0].id }
         it 'returns 201 created', :autodoc do
           is_expected.to eq 201
-          expect(response.body).to_not have_json_path('error')
+          expect(response.body).to_not have_errors
           expect(@user.check_ins.where(bound: bounds[0])).to be_present
         end
       end
 
       context 'w/ invalid beacon id' do
-        let(:id) do
-          id = bounds.last.id
-          ids = Bound.pluck(:id)
-          loop { return id unless ids.include?(id+=1) }
-        end
+        let(:id) { not_existed_id(Bound) }
         it 'returns 404 not found' do
           is_expected.to eq 404
-          json = response.body
-          expect(json).to have_json_path('error')
-          expect(json).to have_json_path('error/message')
-          expect(json).to be_json_eql(%("That bound does not exist.")).at_path('error/message')
+          expect(response.body).to have_error_message('That bound does not exist.')
         end
       end
     end

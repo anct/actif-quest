@@ -13,6 +13,7 @@ RSpec.describe 'Exhibitions API', type: :request do
         json = response.body
         expect(json).to have_json_type(Array)
         expect(json).to have_json_size(5)
+        expect(json).to_not have_errors
       end
     end
   end
@@ -33,21 +34,15 @@ RSpec.describe 'Exhibitions API', type: :request do
           expect(json).to be_json_eql("\"#{exhibition.introduction}\"").at_path('introduction')
           expect(json).to include_json(exhibition.group.to_json)
           expect(json).to have_json_path('image')
+          expect(json).to_not have_errors
         end
       end
 
       context 'w/ invalid exhibition id' do
-        let(:id) do
-          id = exhibitions.last.id
-          ids = Exhibition.pluck(:id)
-          loop { return id unless ids.include?(id+=1) }
-        end
+        let(:id) { not_existed_id(Exhibition) }
         it 'returns 404 not found' do
           is_expected.to eq 404
-          json = response.body
-          expect(json).to have_json_path('error')
-          expect(json).to have_json_path('error/message')
-          expect(json).to be_json_eql(%("That exhibition does not exist.")).at_path('error/message')
+          expect(response.body).to have_error_message('That exhibition does not exist.')
         end
       end
     end
@@ -62,7 +57,7 @@ RSpec.describe 'Exhibitions API', type: :request do
         context 'have not yet voted' do
           it 'returns 201 created', :autodoc do
             is_expected.to eq 201
-            expect(response.body).to_not have_json_path('error')
+            expect(response.body).to_not have_errors
             expect(@user.votes.where(votable: exhibition)).to be_present
           end
         end
@@ -71,26 +66,16 @@ RSpec.describe 'Exhibitions API', type: :request do
           before { @user.votes.create(votable: exhibition) }
           it 'returns 409 conflict' do
             is_expected.to eq 409
-            json = response.body
-            expect(json).to have_json_path('error')
-            expect(json).to have_json_path('error/message')
-            expect(json).to be_json_eql(%("That exhibition have already voted.")).at_path('error/message')
+            expect(response.body).to have_error_message('That exhibition have already voted.')
           end
         end
       end
 
       context 'w/ invalid exhibition id' do
-        let(:id) do
-          id = exhibitions.last.id
-          ids = Exhibition.pluck(:id)
-          loop { return id unless ids.include?(id+=1) }
-        end
+        let(:id) { not_existed_id(Exhibition) }
         it 'returns 404 not found' do
           is_expected.to eq 404
-          json = response.body
-          expect(json).to have_json_path('error')
-          expect(json).to have_json_path('error/message')
-          expect(json).to be_json_eql(%("That exhibition does not exist.")).at_path('error/message')
+          expect(response.body).to have_error_message('That exhibition does not exist.')
         end
       end
     end

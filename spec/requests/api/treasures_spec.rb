@@ -12,6 +12,7 @@ RSpec.describe 'Treasures API', type: :request do
         json = response.body
         expect(json).to have_json_type(Array)
         expect(json).to have_json_size(5)
+        expect(json).to_not have_errors
       end
     end
   end
@@ -31,22 +32,15 @@ RSpec.describe 'Treasures API', type: :request do
           # TODO: あとで画像URLのテストも追記する
           # expect(json).to be_json_eql(%("#{treasure.image_url}")).at_path('imageUrl')
           expect(json).to have_json_path('bound')
-          expect(json).to_not have_json_path('error')
+          expect(json).to_not have_errors
         end
       end
 
       context 'when the treasure does not exist' do
-        let(:id) do
-          ids = Treasure.pluck(:id)
-          id = ids.last || 1
-          loop { return id unless ids.include?(id+=1) }
-        end
+        let(:id) { not_existed_id(Treasure) }
         it 'returns 404 not found' do
           is_expected.to eq 404
-          json = response.body
-          expect(json).to have_json_path('error')
-          expect(json).to have_json_path('error/message')
-          expect(json).to be_json_eql(%("That treasure does not exist.")).at_path('error/message')
+          expect(response.body).to have_error_message('That treasure does not exist.')
         end
       end
     end
@@ -62,7 +56,7 @@ RSpec.describe 'Treasures API', type: :request do
           json = response.body
           expect(json).to have_json_path('id')
           expect(json).to be_json_eql(id).at_path('id')
-          expect(json).to_not have_json_path('error')
+          expect(json).to_not have_errors
         end
       end
 
@@ -72,25 +66,15 @@ RSpec.describe 'Treasures API', type: :request do
         end
         it 'returns 409 conflict' do
           is_expected.to eq 409
-          json = response.body
-          expect(json).to have_json_path('error')
-          expect(json).to have_json_path('error/message')
-          expect(json).to be_json_eql(%("That treasure has already taken by current user.")).at_path('error/message')
+          expect(response.body).to have_error_message('That treasure has already taken by current user.')
         end
       end
 
       context 'when the treasure does not exist' do
-        let(:id) do
-          ids = Treasure.pluck(:id)
-          id = ids.last || 1
-          loop { return id unless ids.include?(id+=1) }
-        end
+        let(:id) { not_existed_id(Treasure) }
         it 'returns 404 not found' do
           is_expected.to eq 404
-          json = response.body
-          expect(json).to have_json_path('error')
-          expect(json).to have_json_path('error/message')
-          expect(json).to be_json_eql(%("That treasure does not exist.")).at_path('error/message')
+          expect(response.body).to have_error_message('That treasure does not exist.')
         end
       end
     end
