@@ -29,6 +29,16 @@ else
   end
 end
 
+puts 'Creating debug user...'
+User.create(
+  name: 'debug_user',
+  screen_name: 'debug user',
+  email: 'debug@example.com',
+  password: 'password',
+  password_confirmation: 'password',
+  authentication_token: 'debug_token'
+).update_attributes(uid: 'debug_user')
+
 puts 'Creating users...'
 users = FactoryGirl.create_list(:user, 30)
 
