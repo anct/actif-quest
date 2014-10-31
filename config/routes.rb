@@ -52,7 +52,7 @@ Rails.application.routes.draw do
         post 'take'
       end
     end
-    resources :users, only: [:show]
+    resources :users, only: [:show, :create]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
