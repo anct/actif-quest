@@ -18,7 +18,12 @@ RSpec.describe 'Users API', type: :request do
         expect(json).to be_json_eql(%("#{user.uid}")).at_path('uid')
         expect(json).to be_json_eql(%("#{user.name}")).at_path('name')
         expect(json).to be_json_eql(%("#{user.screen_name}")).at_path('screenName')
+        expect(json).to be_json_eql(%("#{user.authentication_token}")).at_path('authenticationToken')
         expect(json).to have_json_path('image')
+        expect(json).to have_json_path('image/mdpi')
+        expect(json).to have_json_path('image/hdpi')
+        expect(json).to have_json_path('image/xhdpi')
+        expect(json).to have_json_path('image/xxhdpi')
         expect(json).to_not have_errors
       end
     end
