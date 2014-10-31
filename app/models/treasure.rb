@@ -20,4 +20,6 @@ class Treasure < ActiveRecord::Base
 
   # TODO: 文字数制限等に関するvalidationの検討
   validates_presence_of :name, :description
+
+  mount_uploader :image_url, TreasureUploader
 end
