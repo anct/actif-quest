@@ -1,10 +1,10 @@
 # encoding: utf-8
 
-class ExhibitionUploader < CarrierWave::Uploader::Base
+class UserUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  include CarrierWave::MiniMagick
+  # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -32,8 +32,24 @@ class ExhibitionUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  version :medium do
-    process :resize_to_fill => [300, 400]
+  version :mdpi do
+    process :resize_to_fill => [48, 48]
+  end
+
+  version :hdpi do
+    process :resize_to_fill => [72, 72]
+  end
+
+  version :xhdpi do
+    process :resize_to_fill => [96, 96]
+  end
+
+  version :xxhdpi do
+    process :resize_to_fill => [144, 144]
+  end
+
+  version :xxxhdpi do
+    process :resize_to_fill => [192, 192]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

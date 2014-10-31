@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class ExhibitionUploader < CarrierWave::Uploader::Base
+class TreasureUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -33,7 +33,7 @@ class ExhibitionUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :medium do
-    process :resize_to_fill => [300, 400]
+    process :resize_to_fill => [1080, 840]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

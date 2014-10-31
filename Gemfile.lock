@@ -177,6 +177,8 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.2)
     mime-types (1.25.1)
+    mini_magick (3.8.1)
+      subexec (~> 0.2.1)
     minitest (5.4.1)
     multi_json (1.10.1)
     multi_xml (0.5.5)
@@ -314,6 +316,7 @@ GEM
       colorize
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    subexec (0.2.3)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
@@ -373,6 +376,7 @@ DEPENDENCIES
   json_spec
   kakurenbo
   kaminari
+  mini_magick
   mysql2
   omniauth
   omniauth-facebook

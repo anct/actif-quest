@@ -131,4 +131,6 @@ class User < ActiveRecord::Base
       ).tap { |user| user.add_identity(auth) }
     end
   end
+
+  mount_uploader :image_url, UserUploader
 end
