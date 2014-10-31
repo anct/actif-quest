@@ -23,6 +23,7 @@ group :default do
   gem 'carrierwave'
   gem 'mini_magick'
   gem 'fog'
+  gem 'dotenv-rails'
 
   gem 'bootstrap-sass'
   gem 'autoprefixer-rails'
