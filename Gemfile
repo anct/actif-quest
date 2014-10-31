@@ -21,6 +21,7 @@ group :default do
   gem 'unicorn'
 
   gem 'carrierwave'
+  gem 'mini_magick'
 
   gem 'bootstrap-sass'
   gem 'autoprefixer-rails'
