@@ -4,6 +4,6 @@ class ExhibitionSerializer < ActiveModel::Serializer
   has_one :group
 
   def image
-    object.image_url.url
+    Hash[object.image_url.versions.map{ |key, image| [key, image.url] }]
   end
 end
