@@ -12,7 +12,7 @@
 
 <p class="lead">
   <span class="pink">Image_url:</span>
-  <%= @treasure.image_url %>
+  <%= image_tag(@treasure.image_url) if @treasure.image_url.present? %>
 </p>
 
 <%= admin_edit_btn edit_admin_treasure_path(@treasure) %>
