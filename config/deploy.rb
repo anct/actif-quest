@@ -77,6 +77,19 @@ namespace :rails do
     info "Running `#{command}` as #{user}@#{host}"
     exec %Q(ssh #{user}@#{host} -p #{host.port} -t "bash --login -c 'cd #{fetch(:deploy_to)}/current && #{command}'")
   end
+
+  namespace 'master' do
+    desc 'Import master data'
+    task :import do
+      on roles(:db) do |h|
+        within current_path do
+          with rails_env: fetch(:rails_env) do
+            execute :rake, 'actif_quest:master:import'
+          end
+        end
+      end
+    end
+  end
 end
 
 namespace :db do
